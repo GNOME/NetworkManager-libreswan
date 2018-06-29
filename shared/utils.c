@@ -105,6 +105,8 @@ nm_libreswan_config_write (gint fd,
 	const char *phase2_lifetime_str;
 	const char *leftid;
 	const char *remote_network;
+	const char *ikev2;
+	gboolean has_xauth = TRUE;
 
 	g_return_val_if_fail (fd > 0, FALSE);
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
@@ -114,6 +116,10 @@ nm_libreswan_config_write (gint fd,
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	g_return_val_if_fail (NM_IS_SETTING_VPN (s_vpn), FALSE);
 
+	ikev2 = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKEV2);
+	if (NM_IN_STRSET (ikev2, "propose", "yes", "insist")) {
+		has_xauth = FALSE;
+	}
 	leftid = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTID);
 
 #define WRITE_CHECK_NEWLINE(fd, new_line, debug_write_fcn, error, ...) \
@@ -125,8 +131,12 @@ nm_libreswan_config_write (gint fd,
 
 	WRITE_CHECK (fd, debug_write_fcn, error, "conn %s", con_name);
 	if (leftid) {
-		WRITE_CHECK (fd, debug_write_fcn, error, " aggrmode=yes");
-		WRITE_CHECK (fd, debug_write_fcn, error, " leftid=@%s", leftid);
+		if (has_xauth)
+			WRITE_CHECK (fd, debug_write_fcn, error, " aggrmode=yes");
+		WRITE_CHECK (fd, debug_write_fcn, error,
+		             " leftid=%s%s",
+		             has_xauth ? "@" : "",
+		             leftid);
 	}
 	WRITE_CHECK (fd, debug_write_fcn, error, " authby=secret");
 	WRITE_CHECK (fd, debug_write_fcn, error, " left=%%defaultroute");
@@ -145,17 +155,19 @@ nm_libreswan_config_write (gint fd,
 	else
 		WRITE_CHECK (fd, debug_write_fcn, error, " rightsubnet=%s",
 			     remote_network);
-	WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthclient=yes");
+	if (has_xauth) {
+		WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthclient=yes");
 
-	default_username = nm_setting_vpn_get_user_name (s_vpn);
-	props_username = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTXAUTHUSER);
-	if (props_username && strlen (props_username))
-		WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthusername=%s", props_username);
-	else if (default_username && strlen (default_username))
-		WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthusername=%s", default_username);
+		default_username = nm_setting_vpn_get_user_name (s_vpn);
+		props_username = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTXAUTHUSER);
+		if (props_username && strlen (props_username))
+			WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthusername=%s", props_username);
+		else if (default_username && strlen (default_username))
+			WRITE_CHECK (fd, debug_write_fcn, error, " leftxauthusername=%s", default_username);
 
-	WRITE_CHECK (fd, debug_write_fcn, error, " remote_peer_type=cisco");
-	WRITE_CHECK (fd, debug_write_fcn, error, " rightxauthserver=yes");
+		WRITE_CHECK (fd, debug_write_fcn, error, " remote_peer_type=cisco");
+		WRITE_CHECK (fd, debug_write_fcn, error, " rightxauthserver=yes");
+	}
 
 
 	phase1_alg_str = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKE);
@@ -192,6 +204,9 @@ nm_libreswan_config_write (gint fd,
 
 	if (!openswan && g_strcmp0 (nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_VENDOR), "Cisco") == 0)
 		WRITE_CHECK (fd, debug_write_fcn, error, " cisco-unity=yes");
+
+	if (ikev2 && strlen (ikev2))
+		WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
 
 	WRITE_CHECK_NEWLINE (fd, trailing_newline, debug_write_fcn, error, " auto=add");
 
