@@ -260,6 +260,7 @@ static ValidProperty valid_properties[] = {
 	{ NM_LIBRESWAN_SALIFETIME,                 G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_VENDOR,                     G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_REMOTENETWORK,              G_TYPE_STRING, 0, 0 },
+	{ NM_LIBRESWAN_IKEV2,                      G_TYPE_STRING, 0, 0 },
 	/* Ignored option for internal use */
 	{ NM_LIBRESWAN_PSK_INPUT_MODES,            G_TYPE_NONE, 0, 0 },
 	{ NM_LIBRESWAN_XAUTH_PASSWORD_INPUT_MODES, G_TYPE_NONE, 0, 0 },
