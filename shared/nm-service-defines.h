@@ -51,6 +51,7 @@
 #define NM_LIBRESWAN_SALIFETIME                 "salifetime"
 #define NM_LIBRESWAN_VENDOR                     "vendor"
 #define NM_LIBRESWAN_REMOTENETWORK              "rightsubnet"
+#define NM_LIBRESWAN_IKEV2                      "ikev2"
 
 #define NM_LIBRESWAN_PW_TYPE_SAVE   "save"
 #define NM_LIBRESWAN_PW_TYPE_ASK    "ask"
