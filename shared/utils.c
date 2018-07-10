@@ -106,6 +106,11 @@ nm_libreswan_config_write (gint fd,
 	const char *leftid;
 	const char *remote_network;
 	const char *ikev2;
+	const char *rightid;
+	const char *narrowing;
+	const char *rekey;
+	const char *fragmentation;
+	const char *mobike;
 	gboolean is_ikev2 = FALSE;
 	gboolean has_xauth = TRUE;
 
@@ -144,6 +149,9 @@ nm_libreswan_config_write (gint fd,
 		WRITE_CHECK (fd, debug_write_fcn, error, " leftupdown=%s", leftupdown_script);
 
 	WRITE_CHECK (fd, debug_write_fcn, error, " right=%s", nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_RIGHT));
+	rightid = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_RIGHTID);
+	if (rightid && strlen (rightid))
+		WRITE_CHECK (fd, debug_write_fcn, error, " rightid=%s", rightid);
 	WRITE_CHECK (fd, debug_write_fcn, error, " rightmodecfgserver=yes");
 	WRITE_CHECK (fd, debug_write_fcn, error, " modecfgpull=yes");
 
@@ -181,8 +189,6 @@ nm_libreswan_config_write (gint fd,
 	else if (has_xauth)
 		WRITE_CHECK (fd, debug_write_fcn, error, " phase2alg=aes256-sha1");
 
-	WRITE_CHECK (fd, debug_write_fcn, error, " rekey=yes");
-
 	phase1_lifetime_str = nm_setting_vpn_get_data_item (s_vpn,
 							    NM_LIBRESWAN_IKELIFETIME);
 	if (phase1_lifetime_str && strlen (phase1_lifetime_str))
@@ -197,13 +203,30 @@ nm_libreswan_config_write (gint fd,
 	else if (!is_ikev2)
 		WRITE_CHECK (fd, debug_write_fcn, error, " salifetime=24h");
 
-	WRITE_CHECK (fd, debug_write_fcn, error, " keyingtries=1");
+	rekey = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_REKEY);
+	if (!rekey || !strlen (rekey)) {
+		WRITE_CHECK (fd, debug_write_fcn, error, " rekey=yes");
+		WRITE_CHECK (fd, debug_write_fcn, error, " keyingtries=1");
+	} else
+		WRITE_CHECK (fd, debug_write_fcn, error, " rekey=%s", rekey);
 
 	if (!openswan && g_strcmp0 (nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_VENDOR), "Cisco") == 0)
 		WRITE_CHECK (fd, debug_write_fcn, error, " cisco-unity=yes");
 
 	if (ikev2 && strlen (ikev2))
 		WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
+
+	narrowing = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NARROWING);
+	if (narrowing && strlen (narrowing))
+		WRITE_CHECK (fd, debug_write_fcn, error, " narrowing=%s", narrowing);
+
+	fragmentation = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_FRAGMENTATION);
+	if (fragmentation && strlen (fragmentation))
+		WRITE_CHECK (fd, debug_write_fcn, error, " fragmentation=%s", fragmentation);
+
+	mobike = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_MOBIKE);
+	if (mobike && strlen (mobike))
+		WRITE_CHECK (fd, debug_write_fcn, error, " mobike=%s", mobike);
 
 	WRITE_CHECK_NEWLINE (fd, trailing_newline, debug_write_fcn, error, " auto=add");
 
