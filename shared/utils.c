@@ -106,7 +106,6 @@ nm_libreswan_config_write (gint fd,
 	const char *leftid;
 	const char *remote_network;
 	const char *ikev2;
-	gboolean is_ikev2 = FALSE;
 	gboolean has_xauth = TRUE;
 
 	g_return_val_if_fail (fd > 0, FALSE);
@@ -119,7 +118,6 @@ nm_libreswan_config_write (gint fd,
 
 	ikev2 = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKEV2);
 	if (NM_IN_STRSET (ikev2, "propose", "yes", "insist")) {
-		is_ikev2 = TRUE;
 		has_xauth = FALSE;
 	}
 	leftid = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTID);
