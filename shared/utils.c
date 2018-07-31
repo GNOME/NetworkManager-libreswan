@@ -104,6 +104,9 @@ nm_libreswan_config_write (gint fd,
 	const char *phase1_lifetime_str;
 	const char *phase2_lifetime_str;
 	const char *leftid;
+	const char *leftcert;
+	const char *leftrsasigkey;
+	const char *rightrsasigkey;
 	const char *remote_network;
 	const char *ikev2;
 	const char *rightid;
@@ -145,7 +148,24 @@ nm_libreswan_config_write (gint fd,
 		             has_xauth ? "@" : "",
 		             leftid);
 	}
-	WRITE_CHECK (fd, debug_write_fcn, error, " authby=secret");
+
+	leftrsasigkey = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTRSASIGKEY);
+	rightrsasigkey = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_RIGHTRSASIGKEY);
+	leftcert = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTCERT);
+	if (leftcert) {
+		WRITE_CHECK (fd, debug_write_fcn, error, " leftcert=%s", leftcert);
+		if (!leftrsasigkey)
+			leftrsasigkey = "%cert";
+		if (!rightrsasigkey)
+			rightrsasigkey = "%cert";
+	}
+	if (leftrsasigkey)
+		WRITE_CHECK (fd, debug_write_fcn, error, " leftrsasigkey=%s", leftrsasigkey);
+	if (rightrsasigkey)
+		WRITE_CHECK (fd, debug_write_fcn, error, " rightrsasigkey=%s", rightrsasigkey);
+	if (!leftrsasigkey && !rightrsasigkey)
+		WRITE_CHECK (fd, debug_write_fcn, error, " authby=secret");
+
 	WRITE_CHECK (fd, debug_write_fcn, error, " left=%%defaultroute");
 	WRITE_CHECK (fd, debug_write_fcn, error, " leftmodecfgclient=yes");
 	if (leftupdown_script)
