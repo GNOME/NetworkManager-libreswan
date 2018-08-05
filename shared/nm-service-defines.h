@@ -57,6 +57,7 @@
 #define NM_LIBRESWAN_VENDOR                     "vendor"
 #define NM_LIBRESWAN_REMOTENETWORK              "rightsubnet"
 #define NM_LIBRESWAN_IKEV2                      "ikev2"
+#define NM_LIBRESWAN_NMCONFIGURED               "nm-configured"
 #define NM_LIBRESWAN_NARROWING                  "narrowing"
 #define NM_LIBRESWAN_REKEY                      "rekey"
 #define NM_LIBRESWAN_FRAGMENTATION              "fragmentation"

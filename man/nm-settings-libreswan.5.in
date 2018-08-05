@@ -118,6 +118,10 @@ be filled with '0.0.0.0/0'. Matches the Libreswan parameter of the same name.
 use IKEv2 negotiation. Allowed values are: 'permit', 'no'/'never', 'yes'/'propose' and 'insist'.
 Matches the Libreswan parameter of the same name.
 .TP
+.I "nm-configured"
+let the Libreswan daemon know that NetworkManager is managing the connection. If not specified, a default value of
+"yes" is enforced. Matches the Libreswan parameter of the same name.
+.TP
 .I "narrowing"
 only effective in IKEv2 negotiation. Allowed values are: 'yes' and 'no'.
 Matches the Libreswan parameter of the same name.
