@@ -267,6 +267,7 @@ static ValidProperty valid_properties[] = {
 	{ NM_LIBRESWAN_VENDOR,                     G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_REMOTENETWORK,              G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_IKEV2,                      G_TYPE_STRING, 0, 0 },
+	{ NM_LIBRESWAN_NMCONFIGURED,               G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_NARROWING,                  G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_REKEY,                      G_TYPE_STRING, 0, 0 },
 	{ NM_LIBRESWAN_FRAGMENTATION,              G_TYPE_STRING, 0, 0 },

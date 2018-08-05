@@ -111,6 +111,7 @@ nm_libreswan_config_write (gint fd,
 	const char *remote_network;
 	const char *ikev2;
 	const char *rightid;
+	const char *nm_configured;
 	const char *narrowing;
 	const char *rekey;
 	const char *fragmentation;
@@ -240,6 +241,9 @@ nm_libreswan_config_write (gint fd,
 
 	if (ikev2 && strlen (ikev2))
 		WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
+
+	nm_configured = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NMCONFIGURED);
+	WRITE_CHECK (fd, debug_write_fcn, error, " nm-configured=%s", nm_configured ? : "yes");
 
 	narrowing = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NARROWING);
 	if (narrowing && strlen (narrowing))
