@@ -63,6 +63,12 @@
 #define NM_LIBRESWAN_FRAGMENTATION              "fragmentation"
 #define NM_LIBRESWAN_MOBIKE                     "mobike"
 
+#define NM_LIBRESWAN_IKEV2_NO      "no"
+#define NM_LIBRESWAN_IKEV2_NEVER   "never"
+#define NM_LIBRESWAN_IKEV2_YES     "yes"
+#define NM_LIBRESWAN_IKEV2_PROPOSE "propose"
+#define NM_LIBRESWAN_IKEV2_INSIST  "insist"
+
 #define NM_LIBRESWAN_PW_TYPE_SAVE   "save"
 #define NM_LIBRESWAN_PW_TYPE_ASK    "ask"
 #define NM_LIBRESWAN_PW_TYPE_UNUSED "unused"
