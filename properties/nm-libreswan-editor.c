@@ -542,15 +542,15 @@ update_connection (NMVpnEditor *iface,
 			nm_setting_vpn_add_data_item (s_vpn, NM_LIBRESWAN_LEFTXAUTHUSER, str);
 
 		save_one_password (s_vpn,
-				   priv->builder,
-				   "user_password_entry",
-				   NM_LIBRESWAN_XAUTH_PASSWORD,
-				   NM_LIBRESWAN_XAUTH_PASSWORD_INPUT_MODES);
+		                   priv->builder,
+		                   "user_password_entry",
+		                   NM_LIBRESWAN_XAUTH_PASSWORD,
+		                   NM_LIBRESWAN_XAUTH_PASSWORD_INPUT_MODES);
 		save_one_password (s_vpn,
-				   priv->builder,
-				   "group_password_entry",
-				   NM_LIBRESWAN_PSK_VALUE,
-				   NM_LIBRESWAN_PSK_INPUT_MODES);
+		                   priv->builder,
+		                   "group_password_entry",
+		                   NM_LIBRESWAN_PSK_VALUE,
+		                   NM_LIBRESWAN_PSK_INPUT_MODES);
 		break;
 	default:
 		g_assert_not_reached ();
