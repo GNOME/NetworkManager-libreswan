@@ -157,19 +157,21 @@ nm_libreswan_config_write (gint fd,
 	leftrsasigkey = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTRSASIGKEY);
 	rightrsasigkey = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_RIGHTRSASIGKEY);
 	leftcert = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTCERT);
-	if (leftcert) {
+	if (leftcert && strlen (leftcert)) {
 		WRITE_CHECK (fd, debug_write_fcn, error, " leftcert=%s", leftcert);
 		if (!leftrsasigkey)
 			leftrsasigkey = "%cert";
 		if (!rightrsasigkey)
 			rightrsasigkey = "%cert";
 	}
-	if (leftrsasigkey)
+	if (leftrsasigkey && strlen (leftrsasigkey))
 		WRITE_CHECK (fd, debug_write_fcn, error, " leftrsasigkey=%s", leftrsasigkey);
-	if (rightrsasigkey)
+	if (rightrsasigkey && strlen (rightrsasigkey))
 		WRITE_CHECK (fd, debug_write_fcn, error, " rightrsasigkey=%s", rightrsasigkey);
-	if (!leftrsasigkey && !rightrsasigkey)
+	if (   !(leftrsasigkey && strlen (leftrsasigkey))
+	    && !(rightrsasigkey && strlen (rightrsasigkey))) {
 		WRITE_CHECK (fd, debug_write_fcn, error, " authby=secret");
+	}
 
 	WRITE_CHECK (fd, debug_write_fcn, error, " left=%%defaultroute");
 	WRITE_CHECK (fd, debug_write_fcn, error, " leftmodecfgclient=yes");
