@@ -1758,9 +1758,8 @@ _connect_common (NMVpnServicePlugin   *plugin,
 		return FALSE;
 	}
 
-	/* XAUTH is available only in IKEv1 */
-	priv->xauth_enabled = !(NM_IN_STRSET (nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKEV2),
-	                                      "propose", "yes", "insist"));
+	/* XAUTH is not part of the IKEv2 standard and we always enforce it in IKEv1 */
+	priv->xauth_enabled = !nm_libreswan_utils_setting_is_ikev2 (s_vpn, NULL);
 
 	if (priv->xauth_enabled)
 		priv->password = g_strdup (nm_setting_vpn_get_secret (s_vpn, NM_LIBRESWAN_XAUTH_PASSWORD));
@@ -1843,8 +1842,7 @@ real_need_secrets (NMVpnServicePlugin *plugin,
 	}
 
 xauth_check:
-	if (!NM_IN_STRSET (nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKEV2),
-	                   "propose", "yes", "insist")) {
+	if (!nm_libreswan_utils_setting_is_ikev2 (s_vpn, NULL)) {
 		pw_type = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_XAUTH_PASSWORD_INPUT_MODES);
 		if (!pw_type || strcmp (pw_type, NM_LIBRESWAN_PW_TYPE_UNUSED)) {
 			if (!nm_setting_vpn_get_secret (s_vpn, NM_LIBRESWAN_XAUTH_PASSWORD)) {

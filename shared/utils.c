@@ -109,13 +109,13 @@ nm_libreswan_config_write (gint fd,
 	const char *leftrsasigkey;
 	const char *rightrsasigkey;
 	const char *remote_network;
-	const char *ikev2;
 	const char *rightid;
 	const char *nm_configured;
 	const char *narrowing;
 	const char *rekey;
 	const char *fragmentation;
 	const char *mobike;
+	const char *ikev2 = NULL;
 	gboolean is_ikev2 = FALSE;
 	gboolean has_xauth = TRUE;
 
@@ -127,16 +127,17 @@ nm_libreswan_config_write (gint fd,
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	g_return_val_if_fail (NM_IS_SETTING_VPN (s_vpn), FALSE);
 
-	ikev2 = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKEV2);
-	/* When using IKEv1 (default), if we don't make it explicit to Libreswan,
-	 * it will use system-wide crypto policies for IKEv2
+	is_ikev2 = nm_libreswan_utils_setting_is_ikev2 (s_vpn, &ikev2);
+	/* When IKEv1 is in place, we enforce XAUTH */
+	has_xauth = !is_ikev2;
+	/* When using IKEv1 (default in our plugin), we should ensure that we make
+	 * it explicit to Libreswan (which defaults to IKEv2): when crypto algorithms
+	 * are not specified ("esp" & "ike") Libreswan will use system-wide crypto
+	 * policies based on the IKE version in place.
 	 */
 	if (!ikev2)
-		ikev2 = "never";
-	if (NM_IN_STRSET (ikev2, "propose", "yes", "insist")) {
-		is_ikev2 = TRUE;
-		has_xauth = FALSE;
-	}
+		ikev2 = NM_LIBRESWAN_IKEV2_NEVER;
+
 	leftid = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFTID);
 
 #define WRITE_CHECK_NEWLINE(fd, new_line, debug_write_fcn, error, ...) \
@@ -258,8 +259,7 @@ nm_libreswan_config_write (gint fd,
 	if (!openswan && g_strcmp0 (nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_VENDOR), "Cisco") == 0)
 		WRITE_CHECK (fd, debug_write_fcn, error, " cisco-unity=yes");
 
-	if (ikev2 && strlen (ikev2))
-		WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
+	WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
 
 	nm_configured = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NMCONFIGURED);
 	if (nm_configured && strlen (nm_configured))
