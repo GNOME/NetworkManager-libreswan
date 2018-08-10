@@ -119,8 +119,9 @@ use IKEv2 negotiation. Allowed values are: 'permit', 'no'/'never', 'yes'/'propos
 Matches the Libreswan parameter of the same name.
 .TP
 .I "nm-configured"
-let the Libreswan daemon know that NetworkManager is managing the connection. If not specified, a default value of
-"yes" is enforced. Matches the Libreswan parameter of the same name.
+NetworkManager always enables and passes this option to the Libreswan daemon.
+We expose the option here just to disable it for testing purposes.
+Should never be used in real user scenarios.
 .TP
 .I "narrowing"
 only effective in IKEv2 negotiation. Allowed values are: 'yes' and 'no'.

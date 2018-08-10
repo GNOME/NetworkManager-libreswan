@@ -262,7 +262,10 @@ nm_libreswan_config_write (gint fd,
 		WRITE_CHECK (fd, debug_write_fcn, error, " ikev2=%s", ikev2);
 
 	nm_configured = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NMCONFIGURED);
-	WRITE_CHECK (fd, debug_write_fcn, error, " nm-configured=%s", nm_configured ? : "yes");
+	if (nm_configured && strlen (nm_configured))
+		WRITE_CHECK (fd, debug_write_fcn, error, " nm-configured=%s", nm_configured);
+	else
+		WRITE_CHECK (fd, debug_write_fcn, error, " nm-configured=yes");
 
 	narrowing = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_NARROWING);
 	if (narrowing && strlen (narrowing))
