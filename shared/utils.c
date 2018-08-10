@@ -175,7 +175,11 @@ nm_libreswan_config_write (gint fd,
 	}
 
 	left = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_LEFT);
-	WRITE_CHECK (fd, debug_write_fcn, error, " left=%s", left ? : "%defaultroute");
+	if (left && strlen (left))
+		WRITE_CHECK (fd, debug_write_fcn, error, " left=%s", left);
+	else
+		WRITE_CHECK (fd, debug_write_fcn, error, " left=%%defaultroute");
+
 	WRITE_CHECK (fd, debug_write_fcn, error, " leftmodecfgclient=yes");
 	if (leftupdown_script)
 		WRITE_CHECK (fd, debug_write_fcn, error, " leftupdown=%s", leftupdown_script);
