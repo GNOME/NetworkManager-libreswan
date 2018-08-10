@@ -186,6 +186,14 @@ nm_libreswan_config_write (gint fd,
 
 
 	phase1_alg_str = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_IKE);
+	/* When the crypto is unspecified, let Libreswan use many sets of crypto
+	 * proposals (just leave the property unset). An exception should be made
+	 * for IKEv1 connections in aggressive mode: there the DH group in the crypto
+	 * phase1 proposal must be just one; moreover no more than 4 proposal may be
+	 * specified. So, when IKEv1 aggressive mode ('leftid' specified) is configured
+	 * force the best proposal that should be accepted by all obsolete VPN SW/HW
+	 * acting as a remote access VPN server.
+	 */
 	if (phase1_alg_str && strlen (phase1_alg_str))
 		WRITE_CHECK (fd, debug_write_fcn, error, " ike=%s", phase1_alg_str);
 	else if (has_xauth && leftid)
