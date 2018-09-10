@@ -286,7 +286,6 @@ EXTRA_DIST += \
 
 EXTRA_DIST += \
 	shared/README \
-	shared/nm-utils/gsystem-local-alloc.h \
 	shared/nm-utils/nm-glib.h \
 	shared/nm-utils/nm-macros-internal.h \
 	shared/nm-utils/nm-shared-utils.c \
