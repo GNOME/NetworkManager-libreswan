@@ -24,8 +24,8 @@
 #include "nm-default.h"
 
 #include "utils.h"
+#include "nm-utils/nm-shared-utils.h"
 
-#include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
@@ -149,15 +149,12 @@ nm_libreswan_config_write (gint fd,
 
 	WRITE_CHECK (fd, debug_write_fcn, error, "conn %s", con_name);
 	if (leftid && strlen (leftid)) {
-		gs_free void *addr = malloc (sizeof (struct in6_addr));
-
 		if (xauth_enabled)
 			WRITE_CHECK (fd, debug_write_fcn, error, " aggrmode=yes");
 
 		if (   leftid[0] == '%'
 		    || leftid[0] == '@'
-		    || inet_pton (AF_INET, leftid, addr)
-		    || inet_pton (AF_INET6, leftid, addr)) {
+		    || nm_utils_parse_inaddr_bin (AF_UNSPEC, leftid, NULL)) {
 			WRITE_CHECK (fd, debug_write_fcn, error, " leftid=%s", leftid);
 		} else
 			WRITE_CHECK (fd, debug_write_fcn, error, " leftid=@%s", leftid);
@@ -195,12 +192,9 @@ nm_libreswan_config_write (gint fd,
 	WRITE_CHECK (fd, debug_write_fcn, error, " right=%s", nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_KEY_RIGHT));
 	rightid = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_KEY_RIGHTID);
 	if (rightid && strlen (rightid)) {
-		gs_free void *addr = malloc (sizeof (struct in6_addr));
-
 		if (   rightid[0] == '@'
 		    || rightid[0] == '%'
-		    || inet_pton (AF_INET, rightid, addr)
-		    || inet_pton (AF_INET6, rightid, addr)) {
+		    ||  nm_utils_parse_inaddr_bin (AF_UNSPEC, rightid, NULL)) {
 			WRITE_CHECK (fd, debug_write_fcn, error, " rightid=%s", rightid);
 		} else
 			WRITE_CHECK (fd, debug_write_fcn, error, " rightid=@%s", rightid);
