@@ -54,6 +54,7 @@ typedef struct {
 	GtkBuilder *builder;
 	GtkWidget *widget;
 	GtkSizeGroup *group;
+	GtkWidget *advanced_dialog;
 } LibreswanEditorPrivate;
 
 #define TYPE_IKEV1_XAUTH 0
@@ -249,6 +250,27 @@ init_password_icon (LibreswanEditor *self,
 	                  G_CALLBACK (password_storage_changed_cb), self);
 }
 
+static void
+advanced_button_clicked_cb (GtkWidget *button, gpointer user_data)
+{
+	LibreswanEditorPrivate *priv = LIBRESWAN_EDITOR_GET_PRIVATE (user_data);
+	GtkWidget *toplevel;
+
+	toplevel = gtk_widget_get_toplevel (priv->widget);
+	if (gtk_widget_is_toplevel (toplevel))
+		gtk_window_set_transient_for (GTK_WINDOW (priv->advanced_dialog), GTK_WINDOW (toplevel));
+	gtk_widget_show_all (priv->advanced_dialog);
+}
+
+static GObject *
+get_widget (NMVpnEditor *iface)
+{
+	LibreswanEditor *self = LIBRESWAN_EDITOR (iface);
+	LibreswanEditorPrivate *priv = LIBRESWAN_EDITOR_GET_PRIVATE (self);
+
+	return G_OBJECT (priv->widget);
+}
+
 
 /* Init the widget on the basis of its actual type.
  *  widget_name: the name of the widget
@@ -371,16 +393,21 @@ init_editor_plugin (LibreswanEditor *self,
 	widget_updated = init_widget (self, s_vpn, "gateway_entry", NM_LIBRESWAN_KEY_RIGHT, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
-	widget_updated = init_widget (self, s_vpn, "group_entry", NM_LIBRESWAN_KEY_LEFTID, NULL);
+	widget_updated = init_widget (self, s_vpn, "user_entry", NM_LIBRESWAN_KEY_LEFTXAUTHUSER, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
-	widget_updated = init_widget (self, s_vpn, "user_entry", NM_LIBRESWAN_KEY_LEFTXAUTHUSER, NULL);
+	widget_updated = init_widget (self, s_vpn, "group_entry", NM_LIBRESWAN_KEY_LEFTID, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
 	widget_updated = init_widget (self, s_vpn, "cert_entry", NM_LIBRESWAN_KEY_LEFTCERT, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
 	widget_updated = init_widget (self, s_vpn, "remoteid_entry", NM_LIBRESWAN_KEY_RIGHTID, NULL);
+	g_return_val_if_fail (widget_updated, FALSE);
+
+
+	/* Advanced Dialog */
+	widget_updated = init_widget (self, s_vpn, "domain_entry", NM_LIBRESWAN_KEY_DOMAIN, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
 	widget_updated = init_widget (self, s_vpn, "phase1_entry", NM_LIBRESWAN_KEY_IKE, NULL);
@@ -395,22 +422,32 @@ init_editor_plugin (LibreswanEditor *self,
 	widget_updated = init_widget (self, s_vpn, "phase2_lifetime_entry", NM_LIBRESWAN_KEY_SALIFETIME, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
-	widget_updated = init_widget (self, s_vpn, "domain_entry", NM_LIBRESWAN_KEY_DOMAIN, NULL);
-	g_return_val_if_fail (widget_updated, FALSE);
+	widget_updated = init_widget (self, s_vpn, "rekey_checkbutton", NM_LIBRESWAN_KEY_REKEY, "no");
+	g_return_val_if_fail (widget != NULL, FALSE);
 
 	widget_updated = init_widget (self, s_vpn, "remote_network_entry", NM_LIBRESWAN_KEY_REMOTENETWORK, NULL);
 	g_return_val_if_fail (widget_updated, FALSE);
 
+	widget_updated = init_widget (self, s_vpn, "mobike_checkbutton", NM_LIBRESWAN_KEY_MOBIKE, "yes");
+	g_return_val_if_fail (widget_updated, FALSE);
+
+	widget_updated = init_widget (self, s_vpn, "narrowing_checkbutton", NM_LIBRESWAN_KEY_NARROWING, "yes");
+	g_return_val_if_fail (widget_updated, FALSE);
+
+	widget_updated = init_widget (self, s_vpn, "fragmentation_combo", NM_LIBRESWAN_KEY_FRAGMENTATION, "force");
+	g_return_val_if_fail (widget_updated, FALSE);
+
+	priv->advanced_dialog = GTK_WIDGET (gtk_builder_get_object (priv->builder, "libreswan-advanced-dialog"));
+	g_return_val_if_fail (priv->advanced_dialog != NULL, FALSE);
+
+	g_signal_connect (G_OBJECT (priv->advanced_dialog), "delete-event",
+	                  G_CALLBACK (gtk_widget_hide_on_delete), self);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "advanced_button"));
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (advanced_button_clicked_cb), self);
+
 	return TRUE;
-}
-
-static GObject *
-get_widget (NMVpnEditor *iface)
-{
-	LibreswanEditor *self = LIBRESWAN_EDITOR (iface);
-	LibreswanEditorPrivate *priv = LIBRESWAN_EDITOR_GET_PRIVATE (self);
-
-	return G_OBJECT (priv->widget);
 }
 
 static void
