@@ -115,6 +115,7 @@ nm_libreswan_config_write (gint fd,
 	const char *rekey;
 	const char *fragmentation;
 	const char *mobike;
+	const char *pfs_enabled;
 	gboolean is_ikev2 = FALSE;
 	gboolean xauth_enabled = TRUE;
 
@@ -233,6 +234,10 @@ nm_libreswan_config_write (gint fd,
 		WRITE_CHECK (fd, debug_write_fcn, error, " phase2alg=%s", phase2_alg_str);
 	else if (xauth_enabled && leftid)
 		WRITE_CHECK (fd, debug_write_fcn, error, " phase2alg=aes256-sha1");
+
+	pfs_enabled = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_KEY_PFS);
+	if (pfs_enabled && strlen (pfs_enabled))
+		WRITE_CHECK (fd, debug_write_fcn, error, " pfs=%s", pfs_enabled);
 
 	phase1_lifetime_str = nm_setting_vpn_get_data_item (s_vpn,
 							    NM_LIBRESWAN_KEY_IKELIFETIME);
