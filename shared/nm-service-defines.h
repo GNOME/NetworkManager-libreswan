@@ -48,6 +48,7 @@
 #define NM_LIBRESWAN_KEY_XAUTH_PASSWORD_INPUT_MODES "xauthpasswordinputmodes"
 #define NM_LIBRESWAN_KEY_DOMAIN                     "Domain"
 #define NM_LIBRESWAN_KEY_DHGROUP                    "dhgroup"
+#define NM_LIBRESWAN_KEY_PFS                        "pfs"
 #define NM_LIBRESWAN_KEY_PFSGROUP                   "pfsgroup"
 #define NM_LIBRESWAN_KEY_DPDTIMEOUT                 "dpdtimeout"
 #define NM_LIBRESWAN_KEY_IKE                        "ike"
@@ -67,6 +68,9 @@
 #define NM_LIBRESWAN_IKEV2_YES     "yes"
 #define NM_LIBRESWAN_IKEV2_PROPOSE "propose"
 #define NM_LIBRESWAN_IKEV2_INSIST  "insist"
+
+#define NM_LIBRESWAN_PFS_NO      "no"
+#define NM_LIBRESWAN_PFS_YES     "yes"
 
 #define NM_LIBRESWAN_PW_TYPE_SAVE   "save"
 #define NM_LIBRESWAN_PW_TYPE_ASK    "ask"

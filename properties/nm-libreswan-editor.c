@@ -372,6 +372,18 @@ init_editor_plugin (LibreswanEditor *self,
 	}
 	g_signal_connect (G_OBJECT (widget), "changed", G_CALLBACK (stuff_changed_cb), self);
 
+	/* PFS Enabled */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "pfs_entry"));
+	g_return_val_if_fail (widget != NULL, FALSE);
+	gtk_size_group_add_widget (priv->group, GTK_WIDGET (widget));
+	if (s_vpn) {
+		value = nm_setting_vpn_get_data_item (s_vpn, NM_LIBRESWAN_KEY_PFS);
+		if (!value || !strcmp(value, NM_LIBRESWAN_PFS_YES))
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+	}
+	g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (stuff_changed_cb), self);
+
+
 	/* Phase 1 Lifetime: IKE */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
 	                                             "phase1_lifetime_entry"));
@@ -488,6 +500,7 @@ update_connection (NMVpnEditor *iface,
 	NMSettingVpn *s_vpn;
 	GtkWidget *widget;
 	char *str;
+	bool boolean;
 	int contype;
 
 	if (!check_validity (self, error))
@@ -568,6 +581,15 @@ update_connection (NMVpnEditor *iface,
 	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && *str)
 		nm_setting_vpn_add_data_item (s_vpn, NM_LIBRESWAN_KEY_ESP, str);
+
+	/* PFS Enabled */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "pfs_entry"));
+	boolean = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	if (boolean)
+		nm_setting_vpn_add_data_item (s_vpn, NM_LIBRESWAN_KEY_PFS, NM_LIBRESWAN_PFS_YES);
+	else
+		nm_setting_vpn_add_data_item (s_vpn, NM_LIBRESWAN_KEY_PFS, NM_LIBRESWAN_PFS_NO);
+
 
 	/* Phase 1 Lifetime: ike */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
