@@ -500,7 +500,7 @@ update_connection (NMVpnEditor *iface,
 	NMSettingVpn *s_vpn;
 	GtkWidget *widget;
 	char *str;
-	bool boolean;
+	gboolean boolean;
 	int contype;
 
 	if (!check_validity (self, error))
