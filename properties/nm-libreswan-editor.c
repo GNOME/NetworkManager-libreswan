@@ -252,8 +252,8 @@ init_widget (LibreswanEditor *self,
 	const char *value = NULL;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, widget_name));
-	if (!widget)
-		return FALSE;
+	g_return_val_if_fail (widget, FALSE);
+
 	gtk_size_group_add_widget (priv->group, GTK_WIDGET (widget));
 	if (s_vpn) {
 		value = nm_setting_vpn_get_data_item (s_vpn, key_name);
