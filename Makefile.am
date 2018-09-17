@@ -60,6 +60,8 @@ properties_libutils_la_SOURCES = \
 	shared/utils.h \
 	shared/nm-utils/nm-vpn-plugin-utils.c \
 	shared/nm-utils/nm-vpn-plugin-utils.h \
+	shared/nm-utils/nm-shared-utils.c \
+	shared/nm-utils/nm-shared-utils.h \
 	shared/nm-service-defines.h
 
 properties_libutils_la_CPPFLAGS = \
