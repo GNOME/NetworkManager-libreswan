@@ -2,22 +2,20 @@
 # Copyright (C) 2006 THE NetworkManager-vpnc's COPYRIGHT HOLDER
 # This file is distributed under the same license as the NetworkManager-vpnc package.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
-# kemorigu <kemorigu@redhat.com>, 2018. #zanata
-# kmoriguc <kmoriguc@redhat.com>, 2018. #zanata
-# ljanda <ljanda@redhat.com>, 2018. #zanata
-# lrintel <lrintel@redhat.com>, 2018. #zanata
+# kemorigu <kemorigu@redhat.com>, 2019. #zanata
+# ljanda <ljanda@redhat.com>, 2019. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-21 10:01+0200\n"
-"PO-Revision-Date: 2018-08-24 01:03+0000\n"
-"Last-Translator: kemorigu <kemorigu@redhat.com>\n"
-"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-05-22 03:09+0000\n"
+"Last-Translator: kemorigu <kemorigu@redhat.com>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
 "X-Generator: Zanata 4.6.2\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
@@ -27,16 +25,13 @@ msgstr "IPsec VPN クライアント"
 
 #: ../appdata/network-manager-libreswan.metainfo.xml.in.h:2
 msgid "Libreswan based client for IKEv1 based IPsec virtual private networks"
-msgstr ""
-"IKEv1 ベースの IPsec 仮想プライベートネットワーク向けの Libreswan ベースのク"
-"ライアント"
+msgstr "IKEv1 ベースの IPsec 仮想プライベートネットワーク向けの Libreswan ベースのクライアント"
 
 #: ../appdata/network-manager-libreswan.metainfo.xml.in.h:3
 msgid ""
 "Support for configuring IKEv1 based IPsec virtual private network "
 "connections."
-msgstr ""
-"IKEv1 ベースの IPsec 仮想プライベートネットワーク接続に関する設定のサポート"
+msgstr "IKEv1 ベースの IPsec 仮想プライベートネットワーク接続に関する設定のサポート"
 
 #: ../appdata/network-manager-libreswan.metainfo.xml.in.h:4
 msgid "Compatible with Libreswan and Cisco IPsec VPN servers."
@@ -116,8 +111,7 @@ msgstr "VPN 接続の切断時に終了しません"
 
 #: ../src/nm-libreswan-service.c:2029
 msgid "Enable verbose debug logging (may expose passwords)"
-msgstr ""
-"詳細なデバッグログ機能を有効化する (パスワードが露出する可能性があります)"
+msgstr "詳細なデバッグログ機能を有効化する (パスワードが露出する可能性があります)"
 
 #: ../src/nm-libreswan-service.c:2030
 msgid "D-Bus name to use for this instance"
@@ -141,23 +135,18 @@ msgstr "オブジェクトクラス '%s' には '%s' という名前のプロパ
 #: ../shared/nm-utils/nm-shared-utils.c:1094
 #, c-format
 msgid "property '%s' of object class '%s' is not writable"
-msgstr ""
-"オブジェクトクラス '%s' のプロパティー '%s' は、書き込み可能ではありません"
+msgstr "オブジェクトクラス '%s' のプロパティー '%s' は、書き込み可能ではありません"
 
 #: ../shared/nm-utils/nm-shared-utils.c:1101
 #, c-format
 msgid ""
 "construct property \"%s\" for object '%s' can't be set after construction"
-msgstr ""
-"オブジェクト '%s' のコンストラクトプロパティー \"%s\" は構築後に設定できませ"
-"ん"
+msgstr "オブジェクト '%s' のコンストラクトプロパティー \"%s\" は構築後に設定できません"
 
 #: ../shared/nm-utils/nm-shared-utils.c:1109
 #, c-format
 msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
-msgstr ""
-"'%s::%s' は有効なプロパティー名ではありません。'%s' は GObject サブタイプでは"
-"ありません"
+msgstr "'%s::%s' は有効なプロパティー名ではありません。'%s' は GObject サブタイプではありません"
 
 #: ../shared/nm-utils/nm-shared-utils.c:1118
 #, c-format
@@ -169,14 +158,12 @@ msgstr "プロパティー '%s' (タイプ '%s') をタイプ '%s' の値から�
 msgid ""
 "value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
 "type '%s'"
-msgstr ""
-"値 \"%s\" (タイプ '%s') がプロパティー '%s' (タイプ '%s') に対して無効または"
-"範囲外です"
+msgstr "値 \"%s\" (タイプ '%s') がプロパティー '%s' (タイプ '%s') に対して無効または範囲外です"
 
 #: ../shared/nm-utils/nm-vpn-plugin-utils.c:69
-#, fuzzy, c-format
+#, c-format
 msgid "unable to get editor plugin name: %s"
-msgstr "エディタープラグインを読み込めません: %s"
+msgstr "エディタープラグイン名を取得できません: %s"
 
 #: ../shared/nm-utils/nm-vpn-plugin-utils.c:103
 #, c-format
@@ -278,11 +265,9 @@ msgid "Domain:"
 msgstr "ドメイン:"
 
 #: ../properties/nm-libreswan-dialog.ui.h:21
-msgid ""
-"(NT-)Domain name for authentication.\n"
+msgid "(NT-)Domain name for authentication.\n"
 "config: Domain <domain>"
-msgstr ""
-"(NT-)認証に使用するドメインの名前.\n"
+msgstr "(NT-)認証に使用するドメインの名前.\n"
 "config: Domain <domain>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:23
@@ -296,12 +281,12 @@ msgstr "フェーズ1 アルゴリズム:"
 #: ../properties/nm-libreswan-dialog.ui.h:25
 msgid ""
 "IKE encryption/authentication algorithm to be used for the connection (phase "
-"1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-hash;"
-"modpgroup, …”.\n"
+"1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-"
+"hash;modpgroup, …”.\n"
 "config: ike <proposals>"
 msgstr ""
-"接続に使用する IKE 暗号化/認証アルゴリズム (フェーズ 1 ISAKMP SA)。形式は以下"
-"のとおりになります “cipher-hash;modpgroup, cipher-hash;modpgroup, …”\n"
+"接続に使用する IKE 暗号化/認証アルゴリズム (フェーズ 1 ISAKMP SA)。形式は以下のとおりになります “cipher-"
+"hash;modpgroup, cipher-hash;modpgroup, …”\n"
 "config: ike <proposals>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:27
@@ -311,13 +296,12 @@ msgstr "フェーズ2 アルゴリズム:"
 #: ../properties/nm-libreswan-dialog.ui.h:28
 msgid ""
 "Specifies the algorithms that will be offered/accepted for a phase2 "
-"negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, "
-"…”.\n"
+"negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, …”."
+"\n"
 "config: esp <proposals>"
 msgstr ""
-"フェーズ 2 のネゴシエーションに提供、受け入れられるアルゴリズムを指定します。"
-"形式は以下のとおりになります “cipher-hash;modpgroup, cipher-hash;modpgroup, "
-"…”\n"
+"フェーズ 2 のネゴシエーションに提供、受け入れられるアルゴリズムを指定します。形式は以下のとおりになります “cipher-"
+"hash;modpgroup, cipher-hash;modpgroup, …”\n"
 "config: esp <proposals>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:30
@@ -331,9 +315,8 @@ msgid ""
 "“s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
 "config: ikelifetime <lifetime>"
 msgstr ""
-"再ネゴシエーションが行われるまでの接続のキー入力チャンネルの継続時間。値は数"
-"字で表記され、後にオプションの “s”(秒)、“m”(分)、“h”(時間)、または “d”(日数) "
-"を続けます。\n"
+"再ネゴシエーションが行われるまでの接続のキー入力チャンネルの継続時間。値は数字で表記され、後にオプションの "
+"“s”(秒)、“m”(分)、“h”(時間)、または “d”(日数) を続けます。\n"
 "config: ikelifetime <lifetime>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:33
@@ -348,9 +331,8 @@ msgid ""
 "optional “s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
 "config: salifetime <lifetime>"
 msgstr ""
-"ネゴシエーションが成功してから期限が切れるまでの、接続の特定インスタンス "
-"(ユーザーパケット用の暗号化/認証キーのセット) 継続時間。値は数字で表記され、"
-"後にオプションの “s”(秒)、“m”(分)、“h”(時間)、または “d”(日数) を続けます。\n"
+"ネゴシエーションが成功してから期限が切れるまでの、接続の特定インスタンス (ユーザーパケット用の暗号化/認証キーのセット) "
+"継続時間。値は数字で表記され、後にオプションの “s”(秒)、“m”(分)、“h”(時間)、または “d”(日数) を続けます。\n"
 "config: salifetime <lifetime>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:36
@@ -361,8 +343,7 @@ msgstr "キー更新の無効化"
 msgid ""
 "Whether a connection should not be renegotiated when it is about to expire.\n"
 "config: rekey <no/yes>"
-msgstr ""
-"接続が期限切れになる間近に、再ネゴシエーションを行うかどうか。\n"
+msgstr "接続が期限切れになる間近に、再ネゴシエーションを行うかどうか。\n"
 "config: rekey <no/yes>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:39
@@ -375,8 +356,8 @@ msgid ""
 "doesn’t support PFS.\n"
 "config: pfs <no/yes>"
 msgstr ""
-"PFS (perfect forward security) を無効にします。サーバーが PFS をサポートしな"
-"い場合にのみ、このオプションを有効にしてください。\n"
+"PFS (perfect forward security) を無効にします。サーバーが PFS "
+"をサポートしない場合にのみ、このオプションを有効にしてください。\n"
 "config: pfs <no/yes>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:42
@@ -392,8 +373,7 @@ msgid ""
 "Private subnet behind the remote participant, expressed as network/netmask.\n"
 "config: rightsubnet <net>"
 msgstr ""
-"リモートの参加者の背後のプライベートサブネット。ネットワーク/ネットマスクとし"
-"て表示されます。\n"
+"リモートの参加者の背後のプライベートサブネット。ネットワーク/ネットマスクとして表示されます。\n"
 "config: rightsubnet <net>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:46
@@ -410,8 +390,8 @@ msgid ""
 "down traffic selectors. This option is ignored for IKEv1.\n"
 "config: narrowing <yes/no>"
 msgstr ""
-"IKEv2 ネゴシエーションは、縮小されたトラフィックセレクターでの IPsec 接続の確"
-"立を可能にします。このオプションは IKEv1 では無視されます。\n"
+"IKEv2 ネゴシエーションは、縮小されたトラフィックセレクターでの IPsec 接続の確立を可能にします。このオプションは IKEv1 "
+"では無視されます。\n"
 "config: narrowing <yes/no>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:50

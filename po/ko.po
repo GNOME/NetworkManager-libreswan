@@ -3,24 +3,21 @@
 # This file is distributed under the same license as the nm-vpnc package.
 # Young-Ho Cha <ganadist@gmail.com>, 2007.
 # Namhyung Kim <namhyung@gmail.com>, 2007.
-#
-#
-# eukim <eukim@redhat.com>, 2018. #zanata
-# ljanda <ljanda@redhat.com>, 2018. #zanata
-# lrintel <lrintel@redhat.com>, 2018. #zanata
-# phrdina <phrdina@redhat.com>, 2018. #zanata
+# 
+# 
+# ljanda <ljanda@redhat.com>, 2019. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-21 10:01+0200\n"
-"PO-Revision-Date: 2018-09-27 12:58+0000\n"
-"Last-Translator: eukim <eukim@redhat.com>\n"
-"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
-"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-05-21 01:32+0000\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
+"Language: ko\n"
 "X-Generator: Zanata 4.6.2\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
@@ -151,9 +148,7 @@ msgstr "구성 후에는 개체 '%s'의 구성 속성 ''%s''을(를) 설정할 �
 #: ../shared/nm-utils/nm-shared-utils.c:1109
 #, c-format
 msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
-msgstr ""
-"'%s::%s'은(는) 올바른 속성 이름이 아닙니다. '%s'은(는) GObject 하위 유형이 아"
-"닙니다"
+msgstr "'%s::%s'은(는) 올바른 속성 이름이 아닙니다. '%s'은(는) GObject 하위 유형이 아닙니다"
 
 #: ../shared/nm-utils/nm-shared-utils.c:1118
 #, c-format
@@ -165,9 +160,7 @@ msgstr "유형 '%s'의 값에서 유형 '%s'의 속성 '%s'(을)를 설정할 �
 msgid ""
 "value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
 "type '%s'"
-msgstr ""
-"유형 '%s'의 값 \"%s\"이(가) 잘못되었거나 유형 '%s'의 속성 '%s' 범위에서 벗어"
-"났습니다"
+msgstr "유형 '%s'의 값 \"%s\"이(가) 잘못되었거나 유형 '%s'의 속성 '%s' 범위에서 벗어났습니다"
 
 #: ../shared/nm-utils/nm-vpn-plugin-utils.c:69
 #, fuzzy, c-format
@@ -276,8 +269,7 @@ msgid "Domain:"
 msgstr "도메인:"
 
 #: ../properties/nm-libreswan-dialog.ui.h:21
-msgid ""
-"(NT-)Domain name for authentication.\n"
+msgid "(NT-)Domain name for authentication.\n"
 "config: Domain <domain>"
 msgstr "(NT-) 인증을위한 도메인 이름. config : 도메인 <domain>"
 
@@ -292,13 +284,12 @@ msgstr "1 단계 알고리즘:"
 #: ../properties/nm-libreswan-dialog.ui.h:25
 msgid ""
 "IKE encryption/authentication algorithm to be used for the connection (phase "
-"1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-hash;"
-"modpgroup, …”.\n"
+"1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-"
+"hash;modpgroup, …”.\n"
 "config: ike <proposals>"
 msgstr ""
-"IKE 암호화 / 인증 알고리즘이 연결에 사용됩니다 (1 단계 ISAKMP SA). 형식은 "
-"\"암호 해시, modpgroup, 암호 해시, modpgroup, ...\"입니다. config : ike "
-"<proposals>"
+"IKE 암호화 / 인증 알고리즘이 연결에 사용됩니다 (1 단계 ISAKMP SA). 형식은 \"암호 해시, modpgroup, 암호 "
+"해시, modpgroup, ...\"입니다. config : ike <proposals>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:27
 msgid "Phase2 Algorithms:"
@@ -307,12 +298,12 @@ msgstr "2 단계 알고리즘: "
 #: ../properties/nm-libreswan-dialog.ui.h:28
 msgid ""
 "Specifies the algorithms that will be offered/accepted for a phase2 "
-"negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, "
-"…”.\n"
+"negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, …”."
+"\n"
 "config: esp <proposals>"
 msgstr ""
-"phase2 협상을 위해 제안 / 수락 할 알고리즘을 지정합니다. 형식은 \"암호 해시, "
-"modpgroup, 암호 해시, modpgroup, ...\"입니다. config : esp <proposals>"
+"phase2 협상을 위해 제안 / 수락 할 알고리즘을 지정합니다. 형식은 \"암호 해시, modpgroup, 암호 해시, "
+"modpgroup, ...\"입니다. config : esp <proposals>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:30
 msgid "Phase1 Lifetime:"
@@ -325,9 +316,8 @@ msgid ""
 "“s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
 "config: ikelifetime <lifetime>"
 msgstr ""
-"재협상되기 전에 연결의 키잉 채널이 지속되어야하는 기간. 값은 숫자 뒤에 선택"
-"적 \"s\"(econds), \"m\"(inutes), \"h\"(ours) 또는 \"d\"(ays)로 표시됩니다. "
-"config : ikelifetime <lifetime>"
+"재협상되기 전에 연결의 키잉 채널이 지속되어야하는 기간. 값은 숫자 뒤에 선택적 \"s\"(econds), \"m\"(inutes), "
+"\"h\"(ours) 또는 \"d\"(ays)로 표시됩니다. config : ikelifetime <lifetime>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:33
 msgid "Phase2 Lifetime:"
@@ -341,10 +331,9 @@ msgid ""
 "optional “s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
 "config: salifetime <lifetime>"
 msgstr ""
-"성공적인 협상에서 만료까지 연결의 특정 인스턴스 (사용자 패킷에 대한 암호화 / "
-"인증 키 세트)의 지속 기간. 값은 숫자 뒤에 선택적 \"s\"(econds), \"m"
-"\"(inutes), \"h\"(ours) 또는 \"d\"(ays)로 표시됩니다. 구성 : salifetime "
-"<lifetime>"
+"성공적인 협상에서 만료까지 연결의 특정 인스턴스 (사용자 패킷에 대한 암호화 / 인증 키 세트)의 지속 기간. 값은 숫자 뒤에 선택적 "
+"\"s\"(econds), \"m\"(inutes), \"h\"(ours) 또는 \"d\"(ays)로 표시됩니다. 구성 : "
+"salifetime <lifetime>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:36
 msgid "Disable rekeying"
@@ -354,9 +343,7 @@ msgstr "다시 키 사용 안 함"
 msgid ""
 "Whether a connection should not be renegotiated when it is about to expire.\n"
 "config: rekey <no/yes>"
-msgstr ""
-"연결이 만료 될 때 연결을 재협상하지 않아야하는지 여부. config : rekey <no/"
-"yes>"
+msgstr "연결이 만료 될 때 연결을 재협상하지 않아야하는지 여부. config : rekey <no/yes>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:39
 msgid "Disable PFS"
@@ -368,8 +355,8 @@ msgid ""
 "doesn’t support PFS.\n"
 "config: pfs <no/yes>"
 msgstr ""
-"완벽한 전달 보안을 비활성화하십시오. 서버가 PFS를 지원하지 않는 경우에만이 옵"
-"션을 활성화하십시오. config : pfs <no/yes>"
+"완벽한 전달 보안을 비활성화하십시오. 서버가 PFS를 지원하지 않는 경우에만이 옵션을 활성화하십시오. config : pfs <no/"
+"yes>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:42
 msgid "Connectivity"
@@ -383,9 +370,7 @@ msgstr "원격 네트워크:"
 msgid ""
 "Private subnet behind the remote participant, expressed as network/netmask.\n"
 "config: rightsubnet <net>"
-msgstr ""
-"원격 참가자 뒤의 개인 서브넷으로 네트워크 / 넷 마스크로 표시됩니다. config : "
-"rightsubnet <net>"
+msgstr "원격 참가자 뒤의 개인 서브넷으로 네트워크 / 넷 마스크로 표시됩니다. config : rightsubnet <net>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:46
 msgid "Enable fragmentation"
@@ -401,8 +386,8 @@ msgid ""
 "down traffic selectors. This option is ignored for IKEv1.\n"
 "config: narrowing <yes/no>"
 msgstr ""
-"IKEv2 협상은 협소 한 트래픽 선택 자와의 IPsec 연결을 설정할 수 있습니다. "
-"IKEv1에서는이 옵션이 무시됩니다. config : 좁히기 <yes/no>"
+"IKEv2 협상은 협소 한 트래픽 선택 자와의 IPsec 연결을 설정할 수 있습니다. IKEv1에서는이 옵션이 무시됩니다. config :"
+" 좁히기 <yes/no>"
 
 #: ../properties/nm-libreswan-dialog.ui.h:50
 msgid "Enable MOBIKE"
