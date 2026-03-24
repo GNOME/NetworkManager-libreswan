@@ -1081,12 +1081,63 @@ test_config_read_rsakey(void)
 	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "authby"), ==, "rsasig");
 }
 
+static void
+test_config_read_write_subnets(void)
+{
+	GError *error = NULL;
+	NMSettingVpn *s_vpn;
+	NMSettingVpn *s_vpn_sanitized;
+	char *con_name = NULL;
+	char *str;
+	/* clang-format off */
+	const char *conf_str =
+		"# NetworkManager specific configs, don't remove:\n"
+		"# nm-auto-defaults=no\n\n"
+		"conn con_name\n"
+		" right=11.12.13.14\n"
+		" left=22.33.44.55\n"
+		" leftsubnets=192.168.2.0/24,10.0.1.0/24\n"
+		" rightsubnets=192.168.1.0/24,10.0.0.0/24\n";
+	/* clang-format on */
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "nm-auto-defaults", "no");
+	nm_setting_vpn_add_data_item(s_vpn, "right", "11.12.13.14");
+	nm_setting_vpn_add_data_item(s_vpn, "left", "22.33.44.55");
+	nm_setting_vpn_add_data_item(s_vpn, "rightsubnets", "192.168.1.0/24,10.0.0.0/24");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnets", "192.168.2.0/24,10.0.1.0/24");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	str = nm_libreswan_get_ipsec_conf(4, s_vpn_sanitized, "con_name", NULL, FALSE, TRUE, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(str, ==, conf_str);
+	g_free(str);
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+
+	s_vpn = nm_libreswan_parse_ipsec_conf(conf_str, &con_name, &error);
+	g_assert_no_error(error);
+	g_assert_cmpint(nm_setting_vpn_get_num_data_items(s_vpn), ==, 5);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "nm-auto-defaults"), ==, "no");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "left"), ==, "22.33.44.55");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "right"), ==, "11.12.13.14");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "leftsubnets"),
+	                ==,
+	                "192.168.2.0/24,10.0.1.0/24");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "rightsubnets"),
+	                ==,
+	                "192.168.1.0/24,10.0.0.0/24");
+	g_object_unref(s_vpn);
+	g_clear_pointer(&con_name, g_free);
+}
+
 int
 main(int argc, char **argv)
 {
 	g_test_init(&argc, &argv, NULL);
 
 	g_test_add_func("/utils/config/write", test_config_write);
+	g_test_add_func("/utils/config/subnets", test_config_read_write_subnets);
 	g_test_add_func("/utils/config/read", test_config_read);
 	g_test_add_func("/utils/config/read/rsakey", test_config_read_rsakey);
 	g_test_add_func("/utils/subnets/parse", test_parse_subnets);
