@@ -226,6 +226,12 @@ This option specifies the allowed protocols and ports over connection.
 .TP
 .I "rightprotoport"
 This option specifies the allowed protocols and ports over connection.
+.TP
+.I "leftsubnets"
+This option specifies multiple private subnets behind the left participant.
+.TP
+.I "rightsubnets"
+This option specifies multiple private subnets behind the right participant.
 
 .SH VPN.SECRETS
 .PP
