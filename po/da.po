@@ -4,7 +4,7 @@
 # David Zeuthen <davidz@redhat.com>, 2005.
 # Lasse Bang Mikkelsen <lbm@fatalerror.dk>, 2006, 07.
 # Mads Bille Lundby <lundbymads@gmail.com>, 2009.
-# Alan Mortensen <alanmortensen.am@gmail.com>, 2017, 2018, 2022, 2024-25.
+# Alan Mortensen <over.tackinesss223@passinbox.com>, 2017, 2018, 2022, 2024-26.
 # scootergrisen, 2020.
 #
 msgid ""
@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: NetworkManager-libreswan main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/NetworkManager-"
 "libreswan/issues\n"
-"POT-Creation-Date: 2025-01-21 14:25+0000\n"
-"PO-Revision-Date: 2025-02-18 18:33+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
-"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"POT-Creation-Date: 2026-03-14 07:42+0000\n"
+"PO-Revision-Date: 2026-03-30 19:37+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: Danish <danskgruppen@groups.io>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,23 +49,23 @@ msgstr "Kompatibel med Libreswan og Ciscos IPsec-VPN-servere."
 msgid "The NetworkManager Developers"
 msgstr "Udviklerne af Netværkshåndtering"
 
-#: ../auth-dialog/main.c:164 ../auth-dialog/main.c:227
+#: ../auth-dialog/main.c:170 ../auth-dialog/main.c:234
 msgid "Authenticate VPN"
 msgstr "Godkend VPN"
 
-#: ../auth-dialog/main.c:179
+#: ../auth-dialog/main.c:185
 msgid "Password"
 msgstr "Adgangskode"
 
-#: ../auth-dialog/main.c:189
+#: ../auth-dialog/main.c:195
 msgid "Group Password"
 msgstr "Gruppeadgangskode"
 
-#: ../auth-dialog/main.c:236
+#: ../auth-dialog/main.c:243
 msgid "_Group Password:"
 msgstr "_Gruppeadgangskode:"
 
-#: ../auth-dialog/main.c:486
+#: ../auth-dialog/main.c:512
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
@@ -79,102 +79,103 @@ msgstr "VPN baseret på IPsec"
 msgid "IPsec based VPN for remote clients"
 msgstr "IPsec-baseret VPN til eksterne klienter"
 
-#: ../properties/nm-libreswan-editor-plugin.c:115
+#: ../properties/nm-libreswan-editor-plugin.c:118
 #, c-format
 msgid "Error writing to file “%s”: %s"
 msgstr "Fejl under skrivning til filen “%s”: %s"
 
-#: ../src/nm-libreswan-service.c:515
+#: ../src/nm-libreswan-service.c:587
 msgid "Invalid character in password."
 msgstr "Ugyldigt tegn i adgangskoden."
 
-#: ../src/nm-libreswan-service.c:1501
+#: ../src/nm-libreswan-service.c:1629
 msgid "A password is required."
 msgstr "Adgangskode er krævet."
 
-#: ../src/nm-libreswan-service.c:1621
+#: ../src/nm-libreswan-service.c:1749
 #, c-format
 msgid "Error writing config: %s"
 msgstr "Fejl under skrivning af konfiguration: %s"
 
-#: ../src/nm-libreswan-service.c:1942
-msgid ""
-"Could not process the request because the VPN connection settings were "
-"invalid."
-msgstr ""
-"Kunne ikke behandle forespørgslen, da indstillingerne for VPN-forbindelsen "
-"var ugyldige."
-
-#: ../src/nm-libreswan-service.c:1956
+#: ../src/nm-libreswan-service.c:2110
 msgid "Unhandled pending authentication."
 msgstr "Uhåndteret afventende godkendelse."
 
-#: ../src/nm-libreswan-service.c:2100
+#: ../src/nm-libreswan-service.c:2271
 msgid "Don’t quit when VPN connection terminates"
 msgstr "Afslut ikke, når VPN-forbindelsen afsluttes"
 
-#: ../src/nm-libreswan-service.c:2101
+#: ../src/nm-libreswan-service.c:2278
 msgid "Enable verbose debug logging (may expose passwords)"
 msgstr "Aktivér uddybende fejlsøgningslogning (kan afsløre adgangskoder)"
 
-#: ../src/nm-libreswan-service.c:2102
+#: ../src/nm-libreswan-service.c:2285
 msgid "D-Bus name to use for this instance"
 msgstr "Navn på D-Bus der skal bruges i dette tilfælde"
 
-#: ../src/nm-libreswan-service.c:2125
+#: ../src/nm-libreswan-service.c:2308
 msgid ""
 "This service provides integrated IPsec VPN capability to NetworkManager."
 msgstr ""
 "Denne tjeneste tilbyder integreret Ipsec-VPN-kapacitet til "
 "Netværkshåndtering."
 
-#: ../shared/utils.c:359
+#: ../shared/utils.c:393
 #, c-format
 msgid "Invalid character in '%s'"
 msgstr "Ugyldigt tegn i “%s”"
 
-#: ../shared/utils.c:391 ../shared/utils.c:504
+#: ../shared/utils.c:434 ../shared/utils.c:598
 #, c-format
 msgid "'%s' key needs to be present"
 msgstr "Nøglen “%s” skal være til stede"
 
-#: ../shared/utils.c:417 ../shared/utils.c:513
+#: ../shared/utils.c:465 ../shared/utils.c:607 ../shared/utils.c:758
 #, c-format
 msgid "property '%s' invalid or not supported"
 msgstr "egenskaben “%s” er ugyldig eller ikke understøttet"
 
-#: ../shared/utils.c:566
+#: ../shared/utils.c:489 ../shared/utils.c:499
+#, c-format
+msgid "Invalid VPN setting: %s"
+msgstr "Ugyldig VPN-indstilling: %s"
+
+#: ../shared/utils.c:490
+msgid "Empty VPN configuration"
+msgstr "Tom VPN-konfiguration"
+
+#: ../shared/utils.c:679
 #, c-format
 msgid "'%s' not understood"
 msgstr "“%s” kunne ikke fortolkes"
 
 # ?
-#: ../shared/utils.c:587
+#: ../shared/utils.c:702
 #, c-format
 msgid "Expected a conn line before '%s'"
 msgstr "Forventede en conn-linje før “%s”"
 
-#: ../shared/utils.c:593 ../shared/utils.c:608
+#: ../shared/utils.c:707 ../shared/utils.c:721
 #, c-format
 msgid "'%s' specified multiple times"
 msgstr "“%s” angivet flere gange"
 
-#: ../shared/utils.c:657
+#: ../shared/utils.c:792
 #, c-format
 msgid "'%s' is not supported for '%s'"
 msgstr "“%s” understøttes ikke for “%s”"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1087
+#: ../shared/nm-utils/nm-shared-utils.c:1077
 #, c-format
 msgid "object class '%s' has no property named '%s'"
 msgstr "objektklassen “%s” har ingen egenskab ved navn “%s”"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1094
+#: ../shared/nm-utils/nm-shared-utils.c:1086
 #, c-format
 msgid "property '%s' of object class '%s' is not writable"
 msgstr "egenskaben “%s” for objektklassen “%s” er skrivebeskyttet"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1101
+#: ../shared/nm-utils/nm-shared-utils.c:1095
 #, c-format
 msgid ""
 "construct property \"%s\" for object '%s' can't be set after construction"
@@ -182,19 +183,19 @@ msgstr ""
 "construct-egenskaben “%s” for objektet “%s” kan ikke angives efter "
 "konstruktion"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1109
+#: ../shared/nm-utils/nm-shared-utils.c:1106
 #, c-format
 msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
 msgstr ""
 "“%s::%s” er ikke et gyldigt egenskabsnavn; “%s” er ikke en GObject-undertype"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1118
+#: ../shared/nm-utils/nm-shared-utils.c:1119
 #, c-format
 msgid "unable to set property '%s' of type '%s' from value of type '%s'"
 msgstr ""
 "kan ikke angive egenskaben “%s” af type “%s” ud fra værdien af typen “%s”"
 
-#: ../shared/nm-utils/nm-shared-utils.c:1129
+#: ../shared/nm-utils/nm-shared-utils.c:1131
 #, c-format
 msgid ""
 "value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
@@ -203,27 +204,27 @@ msgstr ""
 "værdien “%s” af typen “%s” er ugyldig eller uden for intervallet for "
 "egenskaben “%s” af typen “%s”"
 
-#: ../shared/nm-utils/nm-vpn-plugin-utils.c:69
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:50
 #, c-format
 msgid "unable to get editor plugin name: %s"
 msgstr "kan ikke hente navnet på udvidelsesmodul til redigering: %s"
 
-#: ../shared/nm-utils/nm-vpn-plugin-utils.c:103
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:61
 #, c-format
 msgid "missing plugin file \"%s\""
 msgstr "manglende udvidelsesmodulfil “%s”"
 
-#: ../shared/nm-utils/nm-vpn-plugin-utils.c:109
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:132
 #, c-format
 msgid "cannot load editor plugin: %s"
 msgstr "kan ikke indlæse udvidelsesmodul til redigering: %s"
 
-#: ../shared/nm-utils/nm-vpn-plugin-utils.c:118
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:142
 #, c-format
 msgid "cannot load factory %s from plugin: %s"
 msgstr "kan ikke indlæse fabrikken %s fra udvidelsesmodul: %s"
 
-#: ../shared/nm-utils/nm-vpn-plugin-utils.c:144
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:165
 msgid "unknown error creating editor instance"
 msgstr "ukendt fejl i forsøget på at danne redigeringsinstans"
 
@@ -312,18 +313,26 @@ msgid "Restart"
 msgstr "Genstart"
 
 #: ../properties/nm-libreswan-dialog.ui.h:22
+msgid "Up"
+msgstr "Op"
+
+#: ../properties/nm-libreswan-dialog.ui.h:23
+msgid "On Demand"
+msgstr "På bestilling"
+
+#: ../properties/nm-libreswan-dialog.ui.h:24
 msgid "IPsec Advanced Options"
 msgstr "Avancerede indstillinger af IPsec"
 
-#: ../properties/nm-libreswan-dialog.ui.h:23
+#: ../properties/nm-libreswan-dialog.ui.h:25
 msgid "Identification"
 msgstr "Identifikation"
 
-#: ../properties/nm-libreswan-dialog.ui.h:24
+#: ../properties/nm-libreswan-dialog.ui.h:26
 msgid "Domain"
 msgstr "Domæne"
 
-#: ../properties/nm-libreswan-dialog.ui.h:25
+#: ../properties/nm-libreswan-dialog.ui.h:27
 msgid ""
 "(NT-)Domain name for authentication.\n"
 "                        config: Domain <domain>"
@@ -331,15 +340,15 @@ msgstr ""
 "(NT-)Domænenavn til godkendelse.\n"
 "                        Konfiguration: Domain <domæne>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:27
+#: ../properties/nm-libreswan-dialog.ui.h:29
 msgid "Security"
 msgstr "Sikkerhed"
 
-#: ../properties/nm-libreswan-dialog.ui.h:28
+#: ../properties/nm-libreswan-dialog.ui.h:30
 msgid "Phase1 Algorithms"
 msgstr "Phase1-algoritmer"
 
-#: ../properties/nm-libreswan-dialog.ui.h:29
+#: ../properties/nm-libreswan-dialog.ui.h:31
 msgid ""
 "IKE encryption/authentication algorithm to be used for the connection (phase "
 "1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-hash;"
@@ -351,11 +360,11 @@ msgstr ""
 "cipher-hash;modpgroup, …”.\n"
 "                        Konfiguration: ike <forslag>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:31
+#: ../properties/nm-libreswan-dialog.ui.h:33
 msgid "Phase2 Algorithms"
 msgstr "Phase2-algoritmer"
 
-#: ../properties/nm-libreswan-dialog.ui.h:32
+#: ../properties/nm-libreswan-dialog.ui.h:34
 msgid ""
 "Specifies the algorithms that will be offered/accepted for a phase2 "
 "negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, "
@@ -366,12 +375,12 @@ msgstr ""
 "forhandling. Formatet er “cipher-hash;modpgroup, cipher-hash;modpgroup, …”.\n"
 "                        Konfiguration: esp <forslag>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:34
+#: ../properties/nm-libreswan-dialog.ui.h:36
 msgid "Phase1 Lifetime"
 msgstr "Phase1-levetid"
 
 # https://en.wikipedia.org/wiki/Keying_(telecommunications)
-#: ../properties/nm-libreswan-dialog.ui.h:35
+#: ../properties/nm-libreswan-dialog.ui.h:37
 msgid ""
 "How long the keying channel of a connection should last before being "
 "renegotiated. The value is expressed by a number followed by an optional "
@@ -383,11 +392,11 @@ msgstr ""
 "“s” (sekunder), “m” (minutter), “h” (timer) eller “d” (dage).\n"
 "                        Konfiguration: ikelifetime <levetid>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:37
+#: ../properties/nm-libreswan-dialog.ui.h:39
 msgid "Phase2 Lifetime"
 msgstr "Phase2-levetid"
 
-#: ../properties/nm-libreswan-dialog.ui.h:38
+#: ../properties/nm-libreswan-dialog.ui.h:40
 msgid ""
 "How long a particular instance of a connection (a set of encryption/"
 "authentication keys for user packets) should last, from successful "
@@ -401,11 +410,11 @@ msgstr ""
 "“s” (sekunder), “m” (minutter), “h” (timer) eller “d” (dage).\n"
 "                        Konfiguration: salifetime <levetid>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:40
+#: ../properties/nm-libreswan-dialog.ui.h:42
 msgid "Disable rekeying"
 msgstr "Deaktivér gen-keying"
 
-#: ../properties/nm-libreswan-dialog.ui.h:41
+#: ../properties/nm-libreswan-dialog.ui.h:43
 msgid ""
 "Whether a connection should not be renegotiated when it is about to expire.\n"
 "                        config: rekey <no/yes>"
@@ -413,11 +422,11 @@ msgstr ""
 "Hvorvidt en forbindelse ikke skal genforhandles, når den er ved at udløbe.\n"
 "                        Konfiguration: rekey <no/yes>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:43
+#: ../properties/nm-libreswan-dialog.ui.h:45
 msgid "Disable PFS"
 msgstr "Deaktivér PFS"
 
-#: ../properties/nm-libreswan-dialog.ui.h:44
+#: ../properties/nm-libreswan-dialog.ui.h:46
 msgid ""
 "Disable perfect forward security. Enable this option only if the server "
 "doesn’t support PFS.\n"
@@ -427,11 +436,11 @@ msgstr ""
 "serveren ikke understøtter PFS.\n"
 "                        Konfiguration: pfs <no/yes>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:46
+#: ../properties/nm-libreswan-dialog.ui.h:48
 msgid "Auth-by"
 msgstr "Godkendt-med"
 
-#: ../properties/nm-libreswan-dialog.ui.h:47
+#: ../properties/nm-libreswan-dialog.ui.h:49
 msgid ""
 "How the two security gateways should authenticate each other. Accepts a "
 "comma-separated list of these values:\n"
@@ -469,15 +478,15 @@ msgstr ""
 "Konfiguration: authby <værdi>\n"
 "                        "
 
-#: ../properties/nm-libreswan-dialog.ui.h:60
+#: ../properties/nm-libreswan-dialog.ui.h:62
 msgid "Connectivity"
 msgstr "Forbindelse"
 
-#: ../properties/nm-libreswan-dialog.ui.h:61
+#: ../properties/nm-libreswan-dialog.ui.h:63
 msgid "Local Network"
 msgstr "Lokalnetværk"
 
-#: ../properties/nm-libreswan-dialog.ui.h:62
+#: ../properties/nm-libreswan-dialog.ui.h:64
 msgid ""
 "Private subnet behind the local participant, expressed as network/netmask.\n"
 "                        config: leftsubnet <net>"
@@ -485,11 +494,11 @@ msgstr ""
 "Privat undernet bag ved den lokale deltager udtrykt som netværk/netmaske.\n"
 "                        Konfiguration: leftsubnet <net>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:64
+#: ../properties/nm-libreswan-dialog.ui.h:66
 msgid "Remote Network"
 msgstr "Fjernnetværk"
 
-#: ../properties/nm-libreswan-dialog.ui.h:65
+#: ../properties/nm-libreswan-dialog.ui.h:67
 msgid ""
 "Private subnet behind the remote participant, expressed as network/netmask.\n"
 "                        config: rightsubnet <net>"
@@ -497,15 +506,15 @@ msgstr ""
 "Privat undernet bag ved fjerndeltageren udtrykt som netværk/netmaske.\n"
 "                        Konfiguration: rightsubnet <net>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:67
+#: ../properties/nm-libreswan-dialog.ui.h:69
 msgid "Enable fragmentation"
 msgstr "Aktivér fragmentering"
 
-#: ../properties/nm-libreswan-dialog.ui.h:68
+#: ../properties/nm-libreswan-dialog.ui.h:70
 msgid "narrowing"
 msgstr "indsnævring"
 
-#: ../properties/nm-libreswan-dialog.ui.h:69
+#: ../properties/nm-libreswan-dialog.ui.h:71
 msgid ""
 "IKEv2 negotiation may allow establishing an IPsec connection with narrowed "
 "down traffic selectors. This option is ignored for IKEv1.\n"
@@ -515,19 +524,19 @@ msgstr ""
 "indsnævrede traffikvælgere. Denne indstilling ignoreres for IKEv1.\n"
 "                        Konfiguration: narrowing <yes/no>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:71
+#: ../properties/nm-libreswan-dialog.ui.h:73
 msgid "Enable MOBIKE"
 msgstr "Aktivér MOBIKE"
 
-#: ../properties/nm-libreswan-dialog.ui.h:72
+#: ../properties/nm-libreswan-dialog.ui.h:74
 msgid "Dead Peer Detection (DPD)"
 msgstr "Genkendelse af døde peers (DPD)"
 
-#: ../properties/nm-libreswan-dialog.ui.h:73
+#: ../properties/nm-libreswan-dialog.ui.h:75
 msgid "Delay"
 msgstr "Ventetid"
 
-#: ../properties/nm-libreswan-dialog.ui.h:74
+#: ../properties/nm-libreswan-dialog.ui.h:76
 msgid ""
 "The delay between Dead Peer Detection (IKEv1 RFC 3706) or IKEv2 Liveness "
 "keepalives that are sent for this connection. Must be a number optionally "
@@ -542,11 +551,11 @@ msgstr ""
 "standard sekunder.\n"
 "                        konfiguration: dpddelay <ventetid>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:76
+#: ../properties/nm-libreswan-dialog.ui.h:78
 msgid "Timeout"
 msgstr "Tidsudløb"
 
-#: ../properties/nm-libreswan-dialog.ui.h:77
+#: ../properties/nm-libreswan-dialog.ui.h:79
 msgid ""
 "The length of time that we will idle without hearing back from our peer. "
 "After this period has elapsed with no response and no traffic, we will "
@@ -566,11 +575,11 @@ msgstr ""
 "standard sekunder.\n"
 "                        Konfiguration: dpdtimeout <tidsudløb>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:79
+#: ../properties/nm-libreswan-dialog.ui.h:81
 msgid "Action"
 msgstr "Handling"
 
-#: ../properties/nm-libreswan-dialog.ui.h:81
+#: ../properties/nm-libreswan-dialog.ui.h:83
 #, no-c-format
 msgid ""
 "When a DPD enabled peer is declared dead, what action should be taken.  "
@@ -585,15 +594,19 @@ msgstr ""
 "“restart” betyder, at ALLE SA'er til den døde peer vil blive genforhandlet.\n"
 "                        Konfiguration: dpdaction <handling>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:83
+#: ../properties/nm-libreswan-dialog.ui.h:85
 msgid "Other options"
 msgstr "Andre indstillinger"
 
-#: ../properties/nm-libreswan-dialog.ui.h:84
+#: ../properties/nm-libreswan-dialog.ui.h:86
+msgid "Connect mode"
+msgstr "Forbindelsestilstand"
+
+#: ../properties/nm-libreswan-dialog.ui.h:87
 msgid "IPsec interface"
 msgstr "IPsec-grænseflade"
 
-#: ../properties/nm-libreswan-dialog.ui.h:85
+#: ../properties/nm-libreswan-dialog.ui.h:88
 msgid ""
 "If set, create or use an existing virtual interface ipsecXXX for \"Routing "
 "based VPNs\" (as opposed to \"Policy based VPNs\"). Valid options are 'yes', "
@@ -614,15 +627,15 @@ msgstr ""
 "vil derfor bruge grænsefladen med navnet “ipsec1”.\n"
 "                        Konfiguration: ipsec-interface yes|no|<tal>"
 
-#: ../properties/nm-libreswan-dialog.ui.h:87
+#: ../properties/nm-libreswan-dialog.ui.h:90
 msgid "Disable Mode Config client"
 msgstr "Deaktivér tilstandskonfigurationsklient"
 
-#: ../properties/nm-libreswan-dialog.ui.h:88
+#: ../properties/nm-libreswan-dialog.ui.h:91
 msgid "Remote certificate name"
 msgstr "Fjernservers _certifikatnavn"
 
-#: ../properties/nm-libreswan-dialog.ui.h:89
+#: ../properties/nm-libreswan-dialog.ui.h:92
 msgid ""
 "If set, specify the name of the certificate from the NSS database to "
 "authenticate the remote"
@@ -630,25 +643,69 @@ msgstr ""
 "Hvis tilvalgt, skal du angive navnet på certifikatet fra NSS-databasen for "
 "at godkende fjernserveren"
 
-#: ../properties/nm-libreswan-dialog.ui.h:90
+#: ../properties/nm-libreswan-dialog.ui.h:93
 msgid "Don't require remote certificate name"
 msgstr "Kræv ikke fjernservers certifikatnavn"
 
-#: ../properties/nm-libreswan-dialog.ui.h:91
+#: ../properties/nm-libreswan-dialog.ui.h:94
+msgid "Send certificate(leftsendcert)"
+msgstr "Send certifikat(leftsendcert)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:95
+msgid ""
+"Configure how Libreswan will send X.509 certificates to the remote host. "
+"Valid values are: 'yes', 'always', 'no', 'never', 'sendifasked'."
+msgstr ""
+"Konfigurér, hvordan Libreswan sender X.509-certifikater til fjernværten. "
+"Gyldige værdier er: “yes”, “always”, “no”, “never”, “sendifasked”."
+
+#: ../properties/nm-libreswan-dialog.ui.h:96
+msgid "Send certificate(rightca)"
+msgstr "Send certifikat(rightca)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:97
+msgid ""
+"Certificate Authority (CA) that signed the certificate of the remote host."
+msgstr "Certifikatautoritet (CA) som underskrev fjernværtens certifikat."
+
+#: ../properties/nm-libreswan-dialog.ui.h:98
+msgid "Local Port Selectors(leftprotoport)"
+msgstr "Lokalportvælgere(leftprotoport)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:99
+msgid "Allowed local protocols and ports over connection"
+msgstr "Tilladte lokalprotokoller og -porte over forbindelse"
+
+#: ../properties/nm-libreswan-dialog.ui.h:100
+msgid "Remote Port Selectors(rightprotoport)"
+msgstr "Fjernportvælgere(rightprotoport)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:101
+msgid "Allowed remote protocols and ports over connection"
+msgstr "Tilladte fjernprotokoller og porte over forbindelse"
+
+#: ../properties/nm-libreswan-dialog.ui.h:102
 msgid "Other"
 msgstr "Andet"
 
-#: ../properties/nm-libreswan-dialog.ui.h:92
+#: ../properties/nm-libreswan-dialog.ui.h:103
 msgid "Advanced Properties"
 msgstr "Avancerede egenskaber"
 
-#: ../properties/nm-libreswan-dialog.ui.h:93
+#: ../properties/nm-libreswan-dialog.ui.h:104
 msgid "_Cancel"
 msgstr "_Annullér"
 
-#: ../properties/nm-libreswan-dialog.ui.h:94
+#: ../properties/nm-libreswan-dialog.ui.h:105
 msgid "_Apply"
 msgstr "An_vend"
+
+#~ msgid ""
+#~ "Could not process the request because the VPN connection settings were "
+#~ "invalid."
+#~ msgstr ""
+#~ "Kunne ikke behandle forespørgslen, da indstillingerne for VPN-"
+#~ "forbindelsen var ugyldige."
 
 #, c-format
 #~ msgid "Can’t open file “%s”: %s"
