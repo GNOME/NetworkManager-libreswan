@@ -163,10 +163,18 @@ add_keyingtries(NMSettingVpn *s_vpn, const char *key, const char *val)
 	/* Synthetic only. See above. */
 }
 
+static gboolean
+first_subnet_is_ipv6(const char *str)
+{
+	gs_free const char **tokens = NULL;
+
+	tokens = nm_utils_strsplit_set(str, ", \t\n\v", FALSE);
+	return tokens && nm_utils_parse_inaddr_prefix_bin(AF_INET6, tokens[0], NULL, NULL);
+}
+
 static void
 add_rightsubnet(NMSettingVpn *s_vpn, const char *key, const char *val)
 {
-	const char *leftsubnet;
 	const char *af;
 
 	if (val == NULL || val[0] == '\0') {
@@ -175,8 +183,9 @@ add_rightsubnet(NMSettingVpn *s_vpn, const char *key, const char *val)
 			val = "::/0";
 	}
 	if (val == NULL || val[0] == '\0') {
-		leftsubnet = nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNET);
-		if (leftsubnet && nm_utils_parse_inaddr_prefix_bin(AF_INET6, leftsubnet, NULL, NULL))
+		if (first_subnet_is_ipv6(nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNET))
+		    || first_subnet_is_ipv6(
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNETS)))
 			val = "::/0";
 	}
 	if (val == NULL || val[0] == '\0') {
@@ -326,8 +335,8 @@ static const struct LibreswanParam params[] = {
 	{NM_LIBRESWAN_KEY_HOSTADDRFAMILY, add, PARAM_PRINTABLE},
 	{NM_LIBRESWAN_KEY_CLIENTADDRFAMILY, add, PARAM_PRINTABLE},
 	{NM_LIBRESWAN_KEY_LEFTSUBNET, add, PARAM_PRINTABLE},
-	{NM_LIBRESWAN_KEY_RIGHTSUBNET, add_rightsubnet, PARAM_PRINTABLE},
 	{NM_LIBRESWAN_KEY_LEFTSUBNETS, add, PARAM_PRINTABLE},
+	{NM_LIBRESWAN_KEY_RIGHTSUBNET, add_rightsubnet, PARAM_PRINTABLE},
 	{NM_LIBRESWAN_KEY_RIGHTSUBNETS, add, PARAM_PRINTABLE},
 
 	{NM_LIBRESWAN_KEY_LEFTXAUTHUSER, add_username, PARAM_STRING | PARAM_OLD},

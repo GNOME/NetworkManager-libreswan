@@ -134,7 +134,10 @@ ending the CISCO_UNITY payload to the peer. The option is ignored otherwise.
 .TP
 .I "rightsubnet"
 the destination subnet that should be reached through the VPN. If omitted, will
-be filled with '0.0.0.0/0'. Matches the Libreswan parameter of the same name.
+be filled with '::/0' when 'clientaddrfamily' is 'ipv6' or the first local subnet
+is IPv6, and with '0.0.0.0/0' otherwise. Set it explicitly when the local subnets
+mix address families, since a single default can only cover one. Matches the
+Libreswan parameter of the same name.
 .TP
 .I "ikev2"
 use IKEv2 negotiation. Allowed values are: 'permit', 'no'/'never', 'yes'/'propose' and 'insist'.

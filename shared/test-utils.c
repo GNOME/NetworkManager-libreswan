@@ -1228,6 +1228,46 @@ test_config_read_write_mixed_family(void)
 	g_clear_pointer(&con_name, g_free);
 }
 
+static void
+test_config_rightsubnet_default(void)
+{
+	GError *error = NULL;
+	NMSettingVpn *s_vpn;
+	NMSettingVpn *s_vpn_sanitized;
+	char *str;
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "right", "11.12.13.14");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnets", "2001:db8:2::/64,2001:db8:3::/64");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn_sanitized, "rightsubnet"), ==, "::/0");
+	str = nm_libreswan_get_ipsec_conf(4, s_vpn_sanitized, "con_name", NULL, FALSE, TRUE, &error);
+	g_assert_no_error(error);
+	g_assert_nonnull(strstr(str, " rightsubnet=::/0\n"));
+	g_free(str);
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "right", "11.12.13.14");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnets", "10.0.1.0/24,10.0.2.0/24");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn_sanitized, "rightsubnet"), ==, "0.0.0.0/0");
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "right", "11.12.13.14");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnet", "2001:db8:2::/64");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn_sanitized, "rightsubnet"), ==, "::/0");
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -1235,6 +1275,7 @@ main(int argc, char **argv)
 
 	g_test_add_func("/utils/config/write", test_config_write);
 	g_test_add_func("/utils/config/subnets", test_config_read_write_subnets);
+	g_test_add_func("/utils/config/rightsubnet-default", test_config_rightsubnet_default);
 	g_test_add_func("/utils/config/mixed-family", test_config_read_write_mixed_family);
 	g_test_add_func("/utils/addr-family", test_addr_family);
 	g_test_add_func("/utils/config/read", test_config_read);
