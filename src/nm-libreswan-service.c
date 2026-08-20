@@ -1432,37 +1432,52 @@ handle_callback(NMDBusLibreswanHelper *object,
 	if (dyn_addr_needed) {
 		const char *sourceip = lookup_string(env, "PLUTO_MY_SOURCEIP");
 		int inner_family = nm_libreswan_addr_family(sourceip);
-		gboolean inner_v6;
 
 		if (inner_family == AF_UNSPEC) {
-			_LOGW("IP Address is missing");
-			goto out;
-		}
-		inner_v6 = (inner_family == AF_INET6);
+			const char *rightsubnet =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_RIGHTSUBNET);
+			const char *rightsubnets =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_RIGHTSUBNETS);
+			gboolean has_own_subnets =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNET)
+				|| nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNETS);
+			gboolean peer_subnet_is_specific =
+				(rightsubnets && !NM_IN_STRSET(rightsubnets, "0.0.0.0/0", "::/0"))
+				|| (rightsubnet && !NM_IN_STRSET(rightsubnet, "0.0.0.0/0", "::/0"));
 
-		/* IP address */
-		variant = addr_to_gvariant(sourceip, inner_family);
-		g_variant_builder_add(ip_config[inner_v6],
-		                      "{sv}",
-		                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_ADDRESS
-		                               : NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
-		                      variant);
-		if (!inner_v6) {
-			/* no PTP is expressed as PTP == ADDRESS */
+			if (!has_own_subnets || !peer_subnet_is_specific) {
+				_LOGW("IP Address is missing");
+				goto out;
+			}
+			_LOGI("No mode config address offered, using the configured subnets");
+		} else {
+			gboolean inner_v6 = (inner_family == AF_INET6);
+
+			/* IP address */
+			variant = addr_to_gvariant(sourceip, inner_family);
+			nm_assert(variant);
 			g_variant_builder_add(ip_config[inner_v6],
 			                      "{sv}",
-			                      NM_VPN_PLUGIN_IP4_CONFIG_PTP,
+			                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_ADDRESS
+			                               : NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
 			                      variant);
-		}
+			if (!inner_v6) {
+				/* no PTP is expressed as PTP == ADDRESS */
+				g_variant_builder_add(ip_config[inner_v6],
+				                      "{sv}",
+				                      NM_VPN_PLUGIN_IP4_CONFIG_PTP,
+				                      variant);
+			}
 
-		/* Netmask */
-		variant = g_variant_new_uint32(inner_v6 ? 128 : 32);
-		g_variant_builder_add(ip_config[inner_v6],
-		                      "{sv}",
-		                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_PREFIX
-		                               : NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
-		                      variant);
-		has_ip_config[inner_v6] = TRUE;
+			/* Netmask */
+			variant = g_variant_new_uint32(inner_v6 ? 128 : 32);
+			g_variant_builder_add(ip_config[inner_v6],
+			                      "{sv}",
+			                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_PREFIX
+			                               : NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
+			                      variant);
+			has_ip_config[inner_v6] = TRUE;
+		}
 	}
 
 	/* DNS */
