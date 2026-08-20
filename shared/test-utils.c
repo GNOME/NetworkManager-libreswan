@@ -25,6 +25,8 @@
 
 #include "nm-utils/nm-shared-utils.h"
 
+#include <sys/socket.h>
+
 static void
 test_config_write(void)
 {
@@ -1131,6 +1133,23 @@ test_config_read_write_subnets(void)
 	g_clear_pointer(&con_name, g_free);
 }
 
+static void
+test_addr_family(void)
+{
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13.14"), ==, AF_INET);
+	g_assert_cmpint(nm_libreswan_addr_family("0.0.0.0"), ==, AF_INET);
+	g_assert_cmpint(nm_libreswan_addr_family("2001:db8:a::1"), ==, AF_INET6);
+	g_assert_cmpint(nm_libreswan_addr_family("::"), ==, AF_INET6);
+	g_assert_cmpint(nm_libreswan_addr_family("::ffff:11.12.13.14"), ==, AF_INET6);
+
+	g_assert_cmpint(nm_libreswan_addr_family(NULL), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family(""), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("%any"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("%defaultroute"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13.14/24"), ==, AF_UNSPEC);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -1138,6 +1157,7 @@ main(int argc, char **argv)
 
 	g_test_add_func("/utils/config/write", test_config_write);
 	g_test_add_func("/utils/config/subnets", test_config_read_write_subnets);
+	g_test_add_func("/utils/addr-family", test_addr_family);
 	g_test_add_func("/utils/config/read", test_config_read);
 	g_test_add_func("/utils/config/read/rsakey", test_config_read_rsakey);
 	g_test_add_func("/utils/subnets/parse", test_parse_subnets);
