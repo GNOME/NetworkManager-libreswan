@@ -110,6 +110,7 @@ typedef struct {
 	gboolean pending_auth;
 	gboolean managed;
 	gboolean xauth_enabled;
+	gboolean tunnel_up;
 
 	GPid pid;
 	guint watch_id;
@@ -254,6 +255,7 @@ connect_cleanup(NMLibreswanPlugin *self)
 
 	priv->connect_step = CONNECT_STEP_FIRST;
 	priv->pending_auth = FALSE;
+	priv->tunnel_up = FALSE;
 
 	/* Don't remove the child watch since it needs to reap the child */
 	priv->watch_id = 0;
@@ -408,7 +410,13 @@ child_watch_cb(GPid pid, gint status, gpointer user_data)
 	 * libreswan versions. */
 	if (priv->connect_step == CONNECT_STEP_WAIT_READY)
 		success = (ret != 1);
-	else
+	else if (priv->connect_step == CONNECT_STEP_CONNECT && priv->tunnel_up) {
+		/* Libreswan reports a non-zero status over a working tunnel: 5.4 relays
+		 * its internal consistency warnings as RC_INTERNAL_ERROR. */
+		if (ret != 0)
+			_LOGI("ignoring status %d from connect: tunnel is up", ret);
+		success = TRUE;
+	} else
 		success = (ret == 0);
 
 	/* Ignore failures here, maybe the libreswan daemon is too old. */
@@ -1561,6 +1569,11 @@ handle_callback(NMDBusLibreswanHelper *object,
 	g_clear_pointer(&str, g_free);
 	nm_vpn_service_plugin_set_config(NM_VPN_SERVICE_PLUGIN(user_data), variant);
 	g_variant_unref(variant);
+
+	/* Pluto runs this verb once the tunnel is up. The other verbs deliver a
+	 * configuration too, before there is a tunnel to carry it. */
+	if (g_str_has_prefix(verb, "up-"))
+		priv->tunnel_up = TRUE;
 
 	if (has_ip_config[0]) {
 		variant = g_variant_builder_end(&ip4_config);
