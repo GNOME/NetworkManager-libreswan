@@ -1129,7 +1129,7 @@ addr_list_to_gvariants(const char *str, const char *desc, GVariant **out4, GVari
 		GVariant *variant;
 		int addr_family;
 
-		addr_family = strchr(split[i], ':') ? AF_INET6 : AF_INET;
+		addr_family = nm_libreswan_addr_family(split[i]);
 		variant = addr_to_gvariant(split[i], addr_family);
 		if (!variant) {
 			_LOGW("ignoring invalid address \"%s\" for %s", split[i], desc);
@@ -1305,7 +1305,16 @@ handle_route(GPtrArray *routes, GVariant *env, const char *verb, gboolean is_xfr
 	if (nm_streq0(peer, next_hop))
 		next_hop = NULL;
 
-	addr_family = strchr(net, ':') ? AF_INET6 : AF_INET;
+	addr_family = nm_libreswan_addr_family(net);
+	if (addr_family == AF_UNSPEC) {
+		_LOGW("Invalid route destination: %s", net);
+		return;
+	}
+
+	if (next_hop && nm_libreswan_addr_family(next_hop) != addr_family)
+		next_hop = NULL;
+	if (my_sourceip && nm_libreswan_addr_family(my_sourceip) != addr_family)
+		my_sourceip = NULL;
 
 	if (!netmask_to_prefixlen(mask, addr_family, &plen)) {
 		_LOGW("Invalid route netmask: %s", mask);
@@ -1350,8 +1359,9 @@ handle_callback(NMDBusLibreswanHelper *object,
 	GVariant *variant;
 	const char *xfrm_interface = NULL;
 	const char *verb;
+	const char *peer;
 	gboolean success = FALSE;
-	gboolean is_ipv6;
+	int outer_family;
 	gboolean dyn_addr_needed;
 	const char *cstr;
 	char *str = NULL;
@@ -1381,22 +1391,20 @@ handle_callback(NMDBusLibreswanHelper *object,
 	g_variant_builder_init(&ip4_config, G_VARIANT_TYPE_VARDICT);
 	g_variant_builder_init(&ip6_config, G_VARIANT_TYPE_VARDICT);
 
-	/* address family for the tunnel. Note that VPN can support traffic of the other
-	 * address family inside the tunnel, when the {left,right}subnets options specify
-	 * the other family. */
-	is_ipv6 = g_str_has_suffix(verb, "-v6");
+	peer = lookup_string(env, "PLUTO_PEER");
+	outer_family = nm_libreswan_addr_family(peer);
+	if (outer_family == AF_UNSPEC) {
+		_LOGW("IPsec/Pluto Right Peer (VPN Gateway) is missing or invalid");
+		goto out;
+	}
 
 	variant = str_to_gvariant(lookup_string(env, "PLUTO_PEER_BANNER"), TRUE);
 	if (variant)
 		g_variant_builder_add(&config, "{sv}", NM_VPN_PLUGIN_CONFIG_BANNER, variant);
 
-	variant = addr_to_gvariant(lookup_string(env, "PLUTO_PEER"), is_ipv6 ? AF_INET6 : AF_INET);
-	if (variant)
-		g_variant_builder_add(&config, "{sv}", NM_VPN_PLUGIN_CONFIG_EXT_GATEWAY, variant);
-	else {
-		_LOGW("IPsec/Pluto Right Peer (VPN Gateway) is missing or invalid");
-		goto out;
-	}
+	variant = addr_to_gvariant(peer, outer_family);
+	nm_assert(variant);
+	g_variant_builder_add(&config, "{sv}", NM_VPN_PLUGIN_CONFIG_EXT_GATEWAY, variant);
 
 	if (nm_streq0(lookup_string(env, "PLUTO_XFRMI_ROUTE"), "yes")) {
 		/* Route-based VPN, configured via option "ipsec-interface". No
@@ -1407,13 +1415,12 @@ handle_callback(NMDBusLibreswanHelper *object,
 		if (variant)
 			g_variant_builder_add(&config, "{sv}", NM_VPN_PLUGIN_CONFIG_TUNDEV, variant);
 	} else {
-		variant =
-			addr_to_gvariant(lookup_string(env, "PLUTO_NEXT_HOP"), is_ipv6 ? AF_INET6 : AF_INET);
+		variant = addr_to_gvariant(lookup_string(env, "PLUTO_NEXT_HOP"), outer_family);
 		if (variant) {
 			g_variant_builder_add(&config,
 			                      "{sv}",
-			                      is_ipv6 ? NM_VPN_PLUGIN_IP6_CONFIG_INT_GATEWAY
-			                              : NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
+			                      outer_family == AF_INET6 ? NM_VPN_PLUGIN_IP6_CONFIG_INT_GATEWAY
+			                                               : NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
 			                      variant);
 		}
 	}
@@ -1423,35 +1430,54 @@ handle_callback(NMDBusLibreswanHelper *object,
 		FALSE);
 
 	if (dyn_addr_needed) {
-		/* IP address */
-		variant =
-			addr_to_gvariant(lookup_string(env, "PLUTO_MY_SOURCEIP"), is_ipv6 ? AF_INET6 : AF_INET);
-		if (variant) {
-			g_variant_builder_add(ip_config[is_ipv6],
+		const char *sourceip = lookup_string(env, "PLUTO_MY_SOURCEIP");
+		int inner_family = nm_libreswan_addr_family(sourceip);
+
+		if (inner_family == AF_UNSPEC) {
+			const char *rightsubnet =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_RIGHTSUBNET);
+			const char *rightsubnets =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_RIGHTSUBNETS);
+			gboolean has_own_subnets =
+				nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNET)
+				|| nm_setting_vpn_get_data_item(s_vpn, NM_LIBRESWAN_KEY_LEFTSUBNETS);
+			gboolean peer_subnet_is_specific =
+				(rightsubnets && !NM_IN_STRSET(rightsubnets, "0.0.0.0/0", "::/0"))
+				|| (rightsubnet && !NM_IN_STRSET(rightsubnet, "0.0.0.0/0", "::/0"));
+
+			if (!has_own_subnets || !peer_subnet_is_specific) {
+				_LOGW("IP Address is missing");
+				goto out;
+			}
+			_LOGI("No mode config address offered, using the configured subnets");
+		} else {
+			gboolean inner_v6 = (inner_family == AF_INET6);
+
+			/* IP address */
+			variant = addr_to_gvariant(sourceip, inner_family);
+			nm_assert(variant);
+			g_variant_builder_add(ip_config[inner_v6],
 			                      "{sv}",
-			                      is_ipv6 ? NM_VPN_PLUGIN_IP6_CONFIG_ADDRESS
-			                              : NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
+			                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_ADDRESS
+			                               : NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
 			                      variant);
-			if (!is_ipv6) {
+			if (!inner_v6) {
 				/* no PTP is expressed as PTP == ADDRESS */
-				g_variant_builder_add(ip_config[is_ipv6],
+				g_variant_builder_add(ip_config[inner_v6],
 				                      "{sv}",
 				                      NM_VPN_PLUGIN_IP4_CONFIG_PTP,
 				                      variant);
 			}
-		} else {
-			_LOGW("IP Address is missing");
-			goto out;
-		}
 
-		/* Netmask */
-		variant = g_variant_new_uint32(is_ipv6 ? 128 : 32);
-		g_variant_builder_add(ip_config[is_ipv6],
-		                      "{sv}",
-		                      is_ipv6 ? NM_VPN_PLUGIN_IP6_CONFIG_PREFIX
-		                              : NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
-		                      variant);
-		has_ip_config[is_ipv6] = TRUE;
+			/* Netmask */
+			variant = g_variant_new_uint32(inner_v6 ? 128 : 32);
+			g_variant_builder_add(ip_config[inner_v6],
+			                      "{sv}",
+			                      inner_v6 ? NM_VPN_PLUGIN_IP6_CONFIG_PREFIX
+			                               : NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
+			                      variant);
+			has_ip_config[inner_v6] = TRUE;
+		}
 	}
 
 	/* DNS */
@@ -1534,10 +1560,7 @@ handle_callback(NMDBusLibreswanHelper *object,
 
 		/* Determine the never-default value based on the presence of SAD routes :( */
 
-		have_sad_routes(lookup_string(env, "PLUTO_PEER"),
-		                is_ipv6 ? AF_INET6 : AF_INET,
-		                &have_routes4,
-		                &have_routes6);
+		have_sad_routes(peer, outer_family, &have_routes4, &have_routes6);
 
 		if (has_ip_config[0] && have_routes4) {
 			g_variant_builder_add(&ip4_config,

@@ -60,6 +60,8 @@ const char *nm_libreswan_find_helper_libexec(const char *progname, GError **erro
 gboolean nm_libreswan_parse_subnets(const char *str, GPtrArray *arr, GError **error);
 char *nm_libreswan_normalize_subnets(const char *str, GError **error);
 
+int nm_libreswan_addr_family(const char *addr);
+
 NMSettingVpn *sanitize_setting_vpn(NMSettingVpn *s_vpn, GError **error);
 NMSettingVpn *get_setting_vpn_sanitized(NMConnection *connection, GError **error);
 

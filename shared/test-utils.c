@@ -25,6 +25,8 @@
 
 #include "nm-utils/nm-shared-utils.h"
 
+#include <sys/socket.h>
+
 static void
 test_config_write(void)
 {
@@ -1131,6 +1133,101 @@ test_config_read_write_subnets(void)
 	g_clear_pointer(&con_name, g_free);
 }
 
+static void
+test_addr_family(void)
+{
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13.14"), ==, AF_INET);
+	g_assert_cmpint(nm_libreswan_addr_family("0.0.0.0"), ==, AF_INET);
+	g_assert_cmpint(nm_libreswan_addr_family("2001:db8:a::1"), ==, AF_INET6);
+	g_assert_cmpint(nm_libreswan_addr_family("::"), ==, AF_INET6);
+	g_assert_cmpint(nm_libreswan_addr_family("::ffff:11.12.13.14"), ==, AF_INET6);
+
+	g_assert_cmpint(nm_libreswan_addr_family(NULL), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family(""), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("%any"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("%defaultroute"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13"), ==, AF_UNSPEC);
+	g_assert_cmpint(nm_libreswan_addr_family("11.12.13.14/24"), ==, AF_UNSPEC);
+}
+
+static void
+test_config_read_write_mixed_family(void)
+{
+	GError *error = NULL;
+	NMSettingVpn *s_vpn;
+	NMSettingVpn *s_vpn_sanitized;
+	char *con_name = NULL;
+	char *str;
+	/* clang-format off */
+	const char *conf_4in6 =
+		"# NetworkManager specific configs, don't remove:\n"
+		"# nm-auto-defaults=no\n\n"
+		"conn con_name\n"
+		" right=2001:db8:a::1\n"
+		" left=2001:db8:a::2\n"
+		" leftsubnet=10.0.9.0/24\n"
+		" rightsubnet=10.0.0.0/24\n";
+	const char *conf_6in4 =
+		"# NetworkManager specific configs, don't remove:\n"
+		"# nm-auto-defaults=no\n\n"
+		"conn con_name\n"
+		" right=11.12.13.14\n"
+		" left=22.33.44.55\n"
+		" leftsubnet=2001:db8:9::/64\n"
+		" rightsubnet=2001:db8::/64\n";
+	/* clang-format on */
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "nm-auto-defaults", "no");
+	nm_setting_vpn_add_data_item(s_vpn, "right", "2001:db8:a::1");
+	nm_setting_vpn_add_data_item(s_vpn, "left", "2001:db8:a::2");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnet", "10.0.9.0/24");
+	nm_setting_vpn_add_data_item(s_vpn, "rightsubnet", "10.0.0.0/24");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	str = nm_libreswan_get_ipsec_conf(5, s_vpn_sanitized, "con_name", NULL, FALSE, TRUE, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(str, ==, conf_4in6);
+	g_free(str);
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+
+	s_vpn = nm_libreswan_parse_ipsec_conf(conf_4in6, &con_name, &error);
+	g_assert_no_error(error);
+	g_assert_cmpint(nm_setting_vpn_get_num_data_items(s_vpn), ==, 5);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "left"), ==, "2001:db8:a::2");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "right"), ==, "2001:db8:a::1");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "leftsubnet"), ==, "10.0.9.0/24");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "rightsubnet"), ==, "10.0.0.0/24");
+	g_object_unref(s_vpn);
+	g_clear_pointer(&con_name, g_free);
+
+	s_vpn = NM_SETTING_VPN(nm_setting_vpn_new());
+	nm_setting_vpn_add_data_item(s_vpn, "nm-auto-defaults", "no");
+	nm_setting_vpn_add_data_item(s_vpn, "right", "11.12.13.14");
+	nm_setting_vpn_add_data_item(s_vpn, "left", "22.33.44.55");
+	nm_setting_vpn_add_data_item(s_vpn, "leftsubnet", "2001:db8:9::/64");
+	nm_setting_vpn_add_data_item(s_vpn, "rightsubnet", "2001:db8::/64");
+	s_vpn_sanitized = sanitize_setting_vpn(s_vpn, &error);
+	g_assert_no_error(error);
+	str = nm_libreswan_get_ipsec_conf(5, s_vpn_sanitized, "con_name", NULL, FALSE, TRUE, &error);
+	g_assert_no_error(error);
+	g_assert_cmpstr(str, ==, conf_6in4);
+	g_free(str);
+	g_object_unref(s_vpn);
+	g_object_unref(s_vpn_sanitized);
+
+	s_vpn = nm_libreswan_parse_ipsec_conf(conf_6in4, &con_name, &error);
+	g_assert_no_error(error);
+	g_assert_cmpint(nm_setting_vpn_get_num_data_items(s_vpn), ==, 5);
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "left"), ==, "22.33.44.55");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "right"), ==, "11.12.13.14");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "leftsubnet"), ==, "2001:db8:9::/64");
+	g_assert_cmpstr(nm_setting_vpn_get_data_item(s_vpn, "rightsubnet"), ==, "2001:db8::/64");
+	g_object_unref(s_vpn);
+	g_clear_pointer(&con_name, g_free);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -1138,6 +1235,8 @@ main(int argc, char **argv)
 
 	g_test_add_func("/utils/config/write", test_config_write);
 	g_test_add_func("/utils/config/subnets", test_config_read_write_subnets);
+	g_test_add_func("/utils/config/mixed-family", test_config_read_write_mixed_family);
+	g_test_add_func("/utils/addr-family", test_addr_family);
 	g_test_add_func("/utils/config/read", test_config_read);
 	g_test_add_func("/utils/config/read/rsakey", test_config_read_rsakey);
 	g_test_add_func("/utils/subnets/parse", test_parse_subnets);

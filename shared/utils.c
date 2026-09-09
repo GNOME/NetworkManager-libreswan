@@ -978,3 +978,17 @@ nm_libreswan_normalize_subnets(const char *str, GError **error)
 
 	return g_strjoinv(",", (char **) arr->pdata);
 }
+
+int
+nm_libreswan_addr_family(const char *addr)
+{
+	if (!addr || !addr[0])
+		return AF_UNSPEC;
+
+	if (nm_utils_parse_inaddr_bin(AF_INET, addr, NULL))
+		return AF_INET;
+	if (nm_utils_parse_inaddr_bin(AF_INET6, addr, NULL))
+		return AF_INET6;
+
+	return AF_UNSPEC;
+}
