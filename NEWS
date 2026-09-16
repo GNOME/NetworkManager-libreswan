@@ -1,4 +1,19 @@
 =========================================================
+NetworkManager-libreswan-1.2.31
+Overview of changes since NetworkManager-libreswan-1.2.30
+=========================================================
+
+* Fix the support of leftsubnets and rightsubnets.
+* Allow subnet-to-subnet tunnels without a mode config address.
+* Default rightsubnet from leftsubnets as well as leftsubnet.
+* Support mixed address family (4in6 and 6in4) tunnels.
+* Improve tunnel address family detection.
+* Handle established tunnel gracefully on ipsec up exit status.
+* Add Kazakh translation.
+* Update Danish, Japanese, Russian, Serbian and Swedish
+  translations.
+
+=========================================================
 NetworkManager-libreswan-1.2.30
 Overview of changes since NetworkManager-libreswan-1.2.29
 =========================================================
