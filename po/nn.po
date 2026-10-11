@@ -1,0 +1,663 @@
+# Norwegian Nynorsk translation for NetworkManager-libreswan.
+# Copyright (C) 2026 NetworkManager-libreswan's COPYRIGHT HOLDER
+# This file is distributed under the same license as the NetworkManager-libreswan package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-libreswan main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/NetworkManager-"
+"libreswan/issues\n"
+"POT-Creation-Date: 2026-10-10 17:55+0000\n"
+"PO-Revision-Date: 2026-10-11 12:00+0200\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../appdata/network-manager-libreswan.metainfo.xml.in.h:1
+msgid "IPsec VPN client"
+msgstr "IPsec VPN-klient"
+
+#: ../appdata/network-manager-libreswan.metainfo.xml.in.h:2
+msgid "Libreswan based client for IKEv1 based IPsec virtual private networks"
+msgstr ""
+"Libreswan-basert klient for virtuelle private nettverk (VPN) med IPsec "
+"basert på IKEv1"
+
+#: ../appdata/network-manager-libreswan.metainfo.xml.in.h:3
+msgid ""
+"Support for configuring IKEv1 based IPsec virtual private network "
+"connections."
+msgstr ""
+"Støtte for å setje opp virtuelle private nettverkstilkoplingar med IPsec "
+"basert på IKEv1."
+
+#: ../appdata/network-manager-libreswan.metainfo.xml.in.h:4
+msgid "Compatible with Libreswan and Cisco IPsec VPN servers."
+msgstr "Kompatibel med Libreswan- og Cisco IPsec VPN-tenarar."
+
+#: ../appdata/network-manager-libreswan.metainfo.xml.in.h:5
+msgid "The NetworkManager Developers"
+msgstr "Utviklarane av NetworkManager"
+
+#: ../auth-dialog/main.c:170 ../auth-dialog/main.c:234
+msgid "Authenticate VPN"
+msgstr "Autentiser VPN"
+
+#: ../auth-dialog/main.c:185
+msgid "Password"
+msgstr "Passord"
+
+#: ../auth-dialog/main.c:195
+msgid "Group Password"
+msgstr "Gruppepassord"
+
+#: ../auth-dialog/main.c:243
+msgid "_Group Password:"
+msgstr "_Gruppepassord:"
+
+#: ../auth-dialog/main.c:512
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
+msgstr ""
+"Du må autentisere for å få tilgang til det virtuelle private nettverket "
+"«%s»."
+
+#: ../properties/nm-libreswan-editor-plugin.c:39
+msgid "IPsec based VPN"
+msgstr "IPsec-basert VPN"
+
+#: ../properties/nm-libreswan-editor-plugin.c:40
+msgid "IPsec based VPN for remote clients"
+msgstr "IPsec-basert VPN for fjernklientar"
+
+#: ../properties/nm-libreswan-editor-plugin.c:118
+#, c-format
+msgid "Error writing to file “%s”: %s"
+msgstr "Feil ved skriving til fila «%s»: %s"
+
+#: ../src/nm-libreswan-service.c:595
+msgid "Invalid character in password."
+msgstr "Ugyldig teikn i passordet."
+
+#: ../src/nm-libreswan-service.c:1665
+msgid "A password is required."
+msgstr "Det krevst eit passord."
+
+#: ../src/nm-libreswan-service.c:1785
+#, c-format
+msgid "Error writing config: %s"
+msgstr "Feil ved skriving av oppsett: %s"
+
+#: ../src/nm-libreswan-service.c:2146
+msgid "Unhandled pending authentication."
+msgstr "Ikkje handsama ventande autentisering."
+
+#: ../src/nm-libreswan-service.c:2307
+msgid "Don’t quit when VPN connection terminates"
+msgstr "Ikkje avslutt når VPN-tilkoplinga vert avbroten"
+
+#: ../src/nm-libreswan-service.c:2314
+msgid "Enable verbose debug logging (may expose passwords)"
+msgstr "Slå på utfyllande feilsøkingslogging (kan avsløre passord)"
+
+#: ../src/nm-libreswan-service.c:2321
+msgid "D-Bus name to use for this instance"
+msgstr "D-Bus-namn som skal brukast for denne instansen"
+
+#: ../src/nm-libreswan-service.c:2344
+msgid ""
+"This service provides integrated IPsec VPN capability to NetworkManager."
+msgstr "Denne tenesta gjev NetworkManager innebygd IPsec VPN-støtte."
+
+#: ../shared/utils.c:404
+#, c-format
+msgid "Invalid character in '%s'"
+msgstr "Ugyldig teikn i «%s»"
+
+#: ../shared/utils.c:445 ../shared/utils.c:609
+#, c-format
+msgid "'%s' key needs to be present"
+msgstr "«%s»-nøkkelen må vere til stades"
+
+#: ../shared/utils.c:476 ../shared/utils.c:618 ../shared/utils.c:769
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "eigenskapen «%s» er ugyldig eller ikkje støtta"
+
+#: ../shared/utils.c:500 ../shared/utils.c:510
+#, c-format
+msgid "Invalid VPN setting: %s"
+msgstr "Ugyldig VPN-innstilling: %s"
+
+#: ../shared/utils.c:501
+msgid "Empty VPN configuration"
+msgstr "Tomt VPN-oppsett"
+
+#: ../shared/utils.c:690
+#, c-format
+msgid "'%s' not understood"
+msgstr "«%s» er ikkje forstått"
+
+#: ../shared/utils.c:713
+#, c-format
+msgid "Expected a conn line before '%s'"
+msgstr "Venta ei conn-linje før «%s»"
+
+#: ../shared/utils.c:718 ../shared/utils.c:732
+#, c-format
+msgid "'%s' specified multiple times"
+msgstr "«%s» er oppgjeve fleire gonger"
+
+#: ../shared/utils.c:803
+#, c-format
+msgid "'%s' is not supported for '%s'"
+msgstr "«%s» er ikkje støtta for «%s»"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1077
+#, c-format
+msgid "object class '%s' has no property named '%s'"
+msgstr "objektklassen «%s» har ingen eigenskap som heiter «%s»"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1086
+#, c-format
+msgid "property '%s' of object class '%s' is not writable"
+msgstr "eigenskapen «%s» til objektklassen «%s» er ikkje skrivbar"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1095
+#, c-format
+msgid ""
+"construct property \"%s\" for object '%s' can't be set after construction"
+msgstr ""
+"konstruksjonseigenskapen «%s» for objektet «%s» kan ikkje setjast etter "
+"konstruksjonen"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1106
+#, c-format
+msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
+msgstr ""
+"«%s::%s» er ikkje eit gyldig eigenskapsnamn; «%s» er ikkje ein undertype av "
+"GObject"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1119
+#, c-format
+msgid "unable to set property '%s' of type '%s' from value of type '%s'"
+msgstr ""
+"kan ikkje setje eigenskapen «%s» av typen «%s» frå verdi av typen «%s»"
+
+#: ../shared/nm-utils/nm-shared-utils.c:1131
+#, c-format
+msgid ""
+"value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
+"type '%s'"
+msgstr ""
+"verdien «%s» av typen «%s» er ugyldig eller utanfor området for eigenskapen "
+"«%s» av typen «%s»"
+
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:50
+#, c-format
+msgid "unable to get editor plugin name: %s"
+msgstr "klarte ikkje hente namnet på redigeringstillegget: %s"
+
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:61
+#, c-format
+msgid "missing plugin file \"%s\""
+msgstr "manglar tilleggsfila «%s»"
+
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:132
+#, c-format
+msgid "cannot load editor plugin: %s"
+msgstr "kan ikkje laste redigeringstillegg: %s"
+
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:142
+#, c-format
+msgid "cannot load factory %s from plugin: %s"
+msgstr "kan ikkje laste fabrikken %s frå tillegget: %s"
+
+#: ../shared/nm-utils/nm-vpn-plugin-utils.c:165
+msgid "unknown error creating editor instance"
+msgstr "ukjend feil ved oppretting av redigeringsinstans"
+
+#: ../properties/nm-libreswan-dialog.ui.h:1
+msgid "IKEv1 (XAUTH)"
+msgstr "IKEv1 (XAUTH)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:2
+msgid "IKEv2 (Certificate)"
+msgstr "IKEv2 (Sertifikat)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:3
+msgid "General"
+msgstr "Generelt"
+
+#: ../properties/nm-libreswan-dialog.ui.h:4
+msgid "_Gateway"
+msgstr "_Portnar"
+
+#: ../properties/nm-libreswan-dialog.ui.h:5
+msgid "Authentication"
+msgstr "Autentisering"
+
+#: ../properties/nm-libreswan-dialog.ui.h:6
+msgid "Type"
+msgstr "Type"
+
+#: ../properties/nm-libreswan-dialog.ui.h:7
+msgid "User name"
+msgstr "Brukarnamn"
+
+#: ../properties/nm-libreswan-dialog.ui.h:8
+msgid "_User password"
+msgstr "_Brukarpassord"
+
+#: ../properties/nm-libreswan-dialog.ui.h:9
+msgid "G_roup name"
+msgstr "_Gruppenamn"
+
+#: ../properties/nm-libreswan-dialog.ui.h:10
+msgid "_Secret"
+msgstr "_Løyndom"
+
+#: ../properties/nm-libreswan-dialog.ui.h:11
+msgid "Show passwords"
+msgstr "Vis passord"
+
+#: ../properties/nm-libreswan-dialog.ui.h:12
+msgid "_Certificate name"
+msgstr "_Sertifikatnamn"
+
+#: ../properties/nm-libreswan-dialog.ui.h:13
+msgid "_Remote ID"
+msgstr "_Ekstern ID"
+
+#: ../properties/nm-libreswan-dialog.ui.h:14
+msgid "A_dvanced…"
+msgstr "_Avansert …"
+
+#: ../properties/nm-libreswan-dialog.ui.h:15
+msgid "no"
+msgstr "nei"
+
+#: ../properties/nm-libreswan-dialog.ui.h:16
+msgid "yes"
+msgstr "ja"
+
+#: ../properties/nm-libreswan-dialog.ui.h:17
+msgid "force"
+msgstr "tving"
+
+#: ../properties/nm-libreswan-dialog.ui.h:18
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:19
+msgid "Hold"
+msgstr "Hald"
+
+#: ../properties/nm-libreswan-dialog.ui.h:20
+msgid "Clear"
+msgstr "Tøm"
+
+#: ../properties/nm-libreswan-dialog.ui.h:21
+msgid "Restart"
+msgstr "Start på nytt"
+
+#: ../properties/nm-libreswan-dialog.ui.h:22
+msgid "Up"
+msgstr "Opp"
+
+#: ../properties/nm-libreswan-dialog.ui.h:23
+msgid "On Demand"
+msgstr "Ved behov"
+
+#: ../properties/nm-libreswan-dialog.ui.h:24
+msgid "IPsec Advanced Options"
+msgstr "Avanserte IPsec-val"
+
+#: ../properties/nm-libreswan-dialog.ui.h:25
+msgid "Identification"
+msgstr "Identifikasjon"
+
+#: ../properties/nm-libreswan-dialog.ui.h:26
+msgid "Domain"
+msgstr "Domene"
+
+#: ../properties/nm-libreswan-dialog.ui.h:27
+msgid ""
+"(NT-)Domain name for authentication.\n"
+"                        config: Domain <domain>"
+msgstr ""
+"(NT-)Domenenamn for autentisering.\n"
+"                        config: Domain <domain>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:29
+msgid "Security"
+msgstr "Tryggleik"
+
+#: ../properties/nm-libreswan-dialog.ui.h:30
+msgid "Phase1 Algorithms"
+msgstr "Algoritmar for fase 1"
+
+#: ../properties/nm-libreswan-dialog.ui.h:31
+msgid ""
+"IKE encryption/authentication algorithm to be used for the connection (phase "
+"1 aka ISAKMP SA). The format is “cipher-hash;modpgroup, cipher-"
+"hash;modpgroup, …”.\n"
+"                        config: ike <proposals>"
+msgstr ""
+"IKE-krypterings-/autentiseringsalgoritme som skal brukast for tilkoplinga (fase 1, også kalla ISAKMP SA). Formatet er «cipher-hash;modpgroup, cipher-hash;modpgroup, …».\n"
+"                        config: ike <proposals>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:33
+msgid "Phase2 Algorithms"
+msgstr "Algoritmar for fase 2"
+
+#: ../properties/nm-libreswan-dialog.ui.h:34
+msgid ""
+"Specifies the algorithms that will be offered/accepted for a phase2 "
+"negotiation. The format is “cipher-hash;modpgroup, cipher-hash;modpgroup, "
+"…”.\n"
+"                        config: esp <proposals>"
+msgstr ""
+"Oppgjev algoritmane som vert tilbodne/godtekne i ei fase 2-forhandling. Formatet er «cipher-hash;modpgroup, cipher-hash;modpgroup, …».\n"
+"                        config: esp <proposals>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:36
+msgid "Phase1 Lifetime"
+msgstr "Levetid for fase 1"
+
+#: ../properties/nm-libreswan-dialog.ui.h:37
+msgid ""
+"How long the keying channel of a connection should last before being "
+"renegotiated. The value is expressed by a number followed by an optional "
+"“s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
+"                        config: ikelifetime <lifetime>"
+msgstr ""
+"Kor lenge nøkkelkanalen til ei tilkopling skal vare før han vert forhandla på nytt. Verdien vert uttrykt som eit tal, følgt av ein valfri «s» (sekund), «m» (minutt), «h» (timar) eller «d» (døgn).\n"
+"                        config: ikelifetime <lifetime>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:39
+msgid "Phase2 Lifetime"
+msgstr "Levetid for fase 2"
+
+#: ../properties/nm-libreswan-dialog.ui.h:40
+msgid ""
+"How long a particular instance of a connection (a set of encryption/"
+"authentication keys for user packets) should last, from successful "
+"negotiation to expiry. The value is expressed by a number followed by an "
+"optional “s”(econds), “m”(inutes), “h”(ours) or “d”(ays).\n"
+"                        config: salifetime <lifetime>"
+msgstr ""
+"Kor lenge ei bestemt førekomst av ei tilkopling (eit sett med krypterings-/autentiseringsnøklar for brukarpakkar) skal vare, frå vellukka forhandling til utløp. Verdien vert uttrykt som eit tal, følgt av ein valfri «s» (sekund), «m» (minutt), «h» (timar) eller «d» (døgn).\n"
+"                        config: salifetime <lifetime>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:42
+msgid "Disable rekeying"
+msgstr "Slå av fornying av nøklar"
+
+#: ../properties/nm-libreswan-dialog.ui.h:43
+msgid ""
+"Whether a connection should not be renegotiated when it is about to expire.\n"
+"                        config: rekey <no/yes>"
+msgstr ""
+"Om ei tilkopling ikkje skal forhandlast på nytt når ho er i ferd med å gå ut på tid.\n"
+"                        config: rekey <no/yes>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:45
+msgid "Disable PFS"
+msgstr "Slå av PFS"
+
+#: ../properties/nm-libreswan-dialog.ui.h:46
+msgid ""
+"Disable perfect forward security. Enable this option only if the server "
+"doesn’t support PFS.\n"
+"                        config: pfs <no/yes>"
+msgstr ""
+"Slå av perfekt framovertryggleik. Slå berre på dette valet viss tenaren ikkje støttar PFS.\n"
+"                        config: pfs <no/yes>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:48
+msgid "Auth-by"
+msgstr "Autentisering med"
+
+#: ../properties/nm-libreswan-dialog.ui.h:49
+msgid ""
+"How the two security gateways should authenticate each other. Accepts a "
+"comma-separated list of these values:\n"
+"- 'rsasig' for RSA with SHA2 or SHA1\n"
+"- 'ecdsa' for ECDSA digital signatures using SHA-2\n"
+"- 'rsa-sha2' for RSASSA-PSS digital signatures based authentication with "
+"SHA2-256\n"
+"- 'rsa-sha2_384' for RSASSA-PSS digital signatures based authentication with "
+"SHA2-384\n"
+"- 'rsa-sha2_512' for RSASSA-PSS digital signatures based authentication with "
+"SHA2-512\n"
+"- 'rsa-sha1' for RSA-PKCSv1.5 digital signatures based authentication with "
+"SHA1\n"
+"- 'secret' for shared secrets (PSK) authentication\n"
+"- 'never' if negotiation is never to be attempted or accepted (useful for "
+"shunt-only conns)\n"
+"- 'null' for null-authentication.\n"
+"If not specified, the default value is 'rsasig,ecdsa'.\n"
+"config: authby <value>\n"
+"                        "
+msgstr ""
+"Korleis dei to tryggleiksportnarane skal autentisere kvarandre. Godtek ei kommaskild liste med desse verdiane:\n"
+"- 'rsasig' for RSA med SHA2 eller SHA1\n"
+"- 'ecdsa' for ECDSA digitale signaturar med SHA-2\n"
+"- 'rsa-sha2' for autentisering med RSASSA-PSS digitale signaturar basert på SHA2-256\n"
+"- 'rsa-sha2_384' for autentisering med RSASSA-PSS digitale signaturar basert på SHA2-384\n"
+"- 'rsa-sha2_512' for autentisering med RSASSA-PSS digitale signaturar basert på SHA2-512\n"
+"- 'rsa-sha1' for autentisering med RSA-PKCSv1.5 digitale signaturar basert på SHA1\n"
+"- 'secret' for autentisering med delt løyndom (PSK)\n"
+"- 'never' viss forhandling aldri skal prøvast eller godtakast (nyttig for berre shunt-tilkoplingar)\n"
+"- 'null' for null-autentisering.\n"
+"Viss ikkje oppgjeve, er standardverdien 'rsasig,ecdsa'.\n"
+"config: authby <value>\n"
+"                        "
+
+#: ../properties/nm-libreswan-dialog.ui.h:62
+msgid "Connectivity"
+msgstr "Tilkopling"
+
+#: ../properties/nm-libreswan-dialog.ui.h:63
+msgid "Local Network"
+msgstr "Lokalt nettverk"
+
+#: ../properties/nm-libreswan-dialog.ui.h:64
+msgid ""
+"Private subnet behind the local participant, expressed as network/netmask.\n"
+"                        config: leftsubnet <net>"
+msgstr ""
+"Privat delnett bak den lokale deltakaren, uttrykt som nettverk/nettmaske.\n"
+"                        config: leftsubnet <net>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:66
+msgid "Remote Network"
+msgstr "Eksternt nettverk"
+
+#: ../properties/nm-libreswan-dialog.ui.h:67
+msgid ""
+"Private subnet behind the remote participant, expressed as network/netmask.\n"
+"                        config: rightsubnet <net>"
+msgstr ""
+"Privat delnett bak den eksterne deltakaren, uttrykt som nettverk/nettmaske.\n"
+"                        config: rightsubnet <net>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:69
+msgid "Enable fragmentation"
+msgstr "Slå på fragmentering"
+
+#: ../properties/nm-libreswan-dialog.ui.h:70
+msgid "narrowing"
+msgstr "smalnar inn"
+
+#: ../properties/nm-libreswan-dialog.ui.h:71
+msgid ""
+"IKEv2 negotiation may allow establishing an IPsec connection with narrowed "
+"down traffic selectors. This option is ignored for IKEv1.\n"
+"                        config: narrowing <yes/no>"
+msgstr ""
+"IKEv2-forhandling kan tillate å opprette ei IPsec-tilkopling med innsnevra trafikkveljarar. Dette valet vert ignorert for IKEv1.\n"
+"                        config: narrowing <yes/no>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:73
+msgid "Enable MOBIKE"
+msgstr "Slå på MOBIKE"
+
+#: ../properties/nm-libreswan-dialog.ui.h:74
+msgid "Dead Peer Detection (DPD)"
+msgstr "Dead Peer Detection (DPD)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:75
+msgid "Delay"
+msgstr "Forseinking"
+
+#: ../properties/nm-libreswan-dialog.ui.h:76
+msgid ""
+"The delay between Dead Peer Detection (IKEv1 RFC 3706) or IKEv2 Liveness "
+"keepalives that are sent for this connection. Must be a number optionally "
+"followed by a time unit: 's' (seconds), 'm' (minutes), 'h' (hours) or 'd' "
+"(days); if the unit is not specified, it defaults to seconds.\n"
+"                        config: dpddelay <delay>"
+msgstr ""
+"Tidsrommet mellom Dead Peer Detection (IKEv1 RFC 3706) eller IKEv2 Liveness keepalives som vert sende for denne tilkoplinga. Må vere eit tal som valfritt vert følgt av ei tidseining: 's' (sekund), 'm' (minutt), 'h' (timar) eller 'd' (døgn); viss tidseininga ikkje er oppgitt, er standardverdien sekund.\n"
+"                        config: dpddelay <delay>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:78
+msgid "Timeout"
+msgstr "Tidsavbrot"
+
+#: ../properties/nm-libreswan-dialog.ui.h:79
+msgid ""
+"The length of time that we will idle without hearing back from our peer. "
+"After this period has elapsed with no response and no traffic, we will "
+"declare the peer dead, and remove the SA. Set value bigger than dpddelay to "
+"enable. If dpdtimeout is set, dpddelay also needs to be set. Must be a "
+"number optionally followed by a time unit: 's' (seconds), 'm' (minutes), 'h' "
+"(hours) or 'd' (days); if the unit is not specified, it defaults to "
+"seconds.\n"
+"                        config: dpdtimeout <timeout>"
+msgstr ""
+"Tida me ventar utan å høyre frå motparten. Når denne perioden er over utan svar og trafikk, erklærer me motparten for død og fjernar SA-en. Set verdien høgare enn dpddelay for å slå på dette. Viss dpdtimeout er sett, må dpddelay òg setjast. Må vere eit tal som valfritt vert følgt av ei tidseining: 's' (sekund), 'm' (minutt), 'h' (timar) eller 'd' (døgn); viss tidseininga ikkje er oppgitt, er standardverdien sekund.\n"
+"                        config: dpdtimeout <timeout>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:81
+msgid "Action"
+msgstr "Handling"
+
+#: ../properties/nm-libreswan-dialog.ui.h:83
+#, no-c-format
+msgid ""
+"When a DPD enabled peer is declared dead, what action should be taken.  "
+"\"hold\" (default) means the eroute will be put into %hold status, while "
+"\"clear\" means the eroute and SA will both be cleared. \"restart\" means "
+"that ALL SAs to the dead peer will be renegotiated.\n"
+"                        config: dpdaction <action>"
+msgstr ""
+"Kva handling som skal utførast når ein motpart med DPD er erklært død. «hold» (standard) tyder at erouten får %hold-status, medan «clear» tyder at både erouten og SA vert fjerna. «restart» tyder at ALLE SA-ar til den døde motparten vert forhandla på nytt.\n"
+"                        config: dpdaction <action>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:85
+msgid "Other options"
+msgstr "Andre val"
+
+#: ../properties/nm-libreswan-dialog.ui.h:86
+msgid "Connect mode"
+msgstr "Tilkoplingsmodus"
+
+#: ../properties/nm-libreswan-dialog.ui.h:87
+msgid "IPsec interface"
+msgstr "IPsec-grensesnitt"
+
+#: ../properties/nm-libreswan-dialog.ui.h:88
+msgid ""
+"If set, create or use an existing virtual interface ipsecXXX for \"Routing "
+"based VPNs\" (as opposed to \"Policy based VPNs\"). Valid options are 'yes', "
+"'no' or a number. When using a number, the IPsec interface created and/or "
+"used will use that number as part of the interface name. For example setting "
+"ipsec-interface=5 will create and/or use the ipsec5 interface. The value 0 "
+"cannot be used and is interpreted as 'no'. The value 'yes' is interpreted as "
+"the number 1, and thus will use the interface named 'ipsec1.'\n"
+"                        config: ipsec-interface yes|no|<num>"
+msgstr ""
+"Viss dette er sett, vert det oppretta eller brukt eit eksisterande virtuelt grensesnitt ipsecXXX for «ruting-baserte VPN-ar» (i motsetnad til «policy-baserte VPN-ar»). Gyldige val er 'yes', 'no' eller eit tal. Når eit tal vert brukt, brukar IPsec-grensesnittet som vert oppretta og/eller brukt, dette talet som del av grensesnittnamnet. Til dømes vil ipsec-interface=5 opprette og/eller bruke grensesnittet ipsec5. Verdien 0 kan ikkje brukast og vert tolka som 'no'. Verdien 'yes' vert tolka som talet 1, og nyttar difor grensesnittet 'ipsec1'.\n"
+"                        config: ipsec-interface yes|no|<num>"
+
+#: ../properties/nm-libreswan-dialog.ui.h:90
+msgid "Disable Mode Config client"
+msgstr "Slå av Mode Config-klient"
+
+#: ../properties/nm-libreswan-dialog.ui.h:91
+msgid "Remote certificate name"
+msgstr "Namn på eksternt sertifikat"
+
+#: ../properties/nm-libreswan-dialog.ui.h:92
+msgid ""
+"If set, specify the name of the certificate from the NSS database to "
+"authenticate the remote"
+msgstr ""
+"Viss dette er sett, oppgje namnet på sertifikatet i NSS-databasen som skal "
+"brukast for å autentisere motparten"
+
+#: ../properties/nm-libreswan-dialog.ui.h:93
+msgid "Don't require remote certificate name"
+msgstr "Ikkje krev namn på eksternt sertifikat"
+
+#: ../properties/nm-libreswan-dialog.ui.h:94
+msgid "Send certificate(leftsendcert)"
+msgstr "Send sertifikat(leftsendcert)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:95
+msgid ""
+"Configure how Libreswan will send X.509 certificates to the remote host. "
+"Valid values are: 'yes', 'always', 'no', 'never', 'sendifasked'."
+msgstr ""
+"Set korleis Libreswan skal sende X.509-sertifikat til den eksterne verten. "
+"Gyldige verdiar er: 'yes', 'always', 'no', 'never', 'sendifasked'."
+
+#: ../properties/nm-libreswan-dialog.ui.h:96
+msgid "Send certificate(rightca)"
+msgstr "Send sertifikat(rightca)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:97
+msgid ""
+"Certificate Authority (CA) that signed the certificate of the remote host."
+msgstr ""
+"Sertifikatutsteder (CA) som signerte sertifikatet til den eksterne verten."
+
+#: ../properties/nm-libreswan-dialog.ui.h:98
+msgid "Local Port Selectors(leftprotoport)"
+msgstr "Lokale portveljarar(leftprotoport)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:99
+msgid "Allowed local protocols and ports over connection"
+msgstr "Tillatne lokale protokollar og portar over tilkoplinga"
+
+#: ../properties/nm-libreswan-dialog.ui.h:100
+msgid "Remote Port Selectors(rightprotoport)"
+msgstr "Eksterne portveljarar(rightprotoport)"
+
+#: ../properties/nm-libreswan-dialog.ui.h:101
+msgid "Allowed remote protocols and ports over connection"
+msgstr "Tillatne eksterne protokollar og portar over tilkoplinga"
+
+#: ../properties/nm-libreswan-dialog.ui.h:102
+msgid "Other"
+msgstr "Anna"
+
+#: ../properties/nm-libreswan-dialog.ui.h:103
+msgid "Advanced Properties"
+msgstr "Avanserte eigenskapar"
+
+#: ../properties/nm-libreswan-dialog.ui.h:104
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: ../properties/nm-libreswan-dialog.ui.h:105
+msgid "_Apply"
+msgstr "_Bruk"
